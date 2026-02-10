@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const CommentForm = ({ handleAddComment }) => {
-  const [formData, setFormData] = useState({ text: '' });
+  const [formData, setFormData] = useState({ content: '' });
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -11,7 +11,7 @@ const CommentForm = ({ handleAddComment }) => {
     evt.preventDefault();
     // add handleAddComment
     handleAddComment(formData)
-    setFormData({ text: '' });
+    setFormData({ content: '' });
   };
 
   return (
@@ -20,9 +20,9 @@ const CommentForm = ({ handleAddComment }) => {
       <textarea
         required
         type='text'
-        name='text'
-        id='text-input'
-        value={formData.text}
+        name='content'
+        id='content-input'
+        value={formData.content}
         onChange={handleChange}
       />
       <button type='submit'>SUBMIT COMMENT</button>

@@ -1,3 +1,4 @@
+import './App.css'
 import { useContext, useEffect, useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router'
 import NavBar from './components/NavBar/Navbar.jsx'
@@ -7,49 +8,51 @@ import Landing from './components/Landing/Landing.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
 import { UserContext } from './contexts/UserContext.jsx'
 
-import * as hootService from './services/hootService.js'
+import * as postService from './services/postService.js'
 
-import HootList from './components/HootList/HootList.jsx'
-import HootDetails from './components/HootDetails/HootDetails.jsx'
-import HootForm from './components/HootForm/HootForm.jsx'
+import PostList from './components/PostList/PostList.jsx'
+import PostDetails from './components/PostDetails/PostDetails.jsx'
+import PostForm from './components/PostForm/PostForm.jsx'
 
 const App = () => {
     const { user } = useContext(UserContext)
-    const [hoots, setHoots] = useState([])
+    const [posts, setPosts] = useState([])
     const navigate = useNavigate()
-    console.log(hoots)
+    console.log(posts)
+
     useEffect(() => {
-        const fetchAllHoots = async () => {
-            const hootsData = await hootService.index()
-            setHoots(hootsData)
+        const fetchAllPosts = async () => {
+            const postsData = await postService.index()
+            console.log("Data from server:", postsData)
+            setPosts(postsData)
         }
-        if (user) fetchAllHoots()
+        if (user) fetchAllPosts()
     }, [user])
 
-    const handleAddHoot = async (hootFormData) => {
-        const newHoot = await hootService.create(hootFormData)
-        setHoots([newHoot, ...hoots])
-        navigate('/hoots')
+    const handleAddPost = async (postFormData) => {
+        const newPost = await postService.create(postFormData)
+        setPosts([newPost, ...posts])
+        navigate('/posts')
     }
 
-    const handleDeleteHoot = async (hootId) => {
-        const deletedHoot = await hootService.deleteHoot(hootId)
-        const filteredHoots = hoots.filter((hoot) => hoot.id !== deletedHoot.id)
-        setHoots(filteredHoots)
-        navigate('/hoots')
+    const handleDeletePost = async (postId) => {
+        const deletedPost = await postService.deletePost(postId)
+        const filteredPosts = posts.filter((post) => post.id !== deletedPost.id)
+        setPosts(filteredPosts)
+        navigate('/posts')
     }
 
-    const handleUpdateHoot = async (hootId, hootFormData) => {
-        console.log(hootId, hootFormData)
-        const updatedHoot = await hootService.updateHoot(hootId, hootFormData)
-        setHoots(
-            hoots.map((hoot) =>
-                hoot.id === updatedHoot.id ? updatedHoot : hoot,
+    const handleUpdatePost = async (postId, postFormData) => {
+        console.log(postId, postFormData)
+        const updatedPost = await postService.updatePost(postId, postFormData)
+        setPosts(
+            posts.map((post) =>
+                post.id === updatedPost.id ? updatedPost : post,
             ),
         )
-        navigate(`/hoots/${hootId}`)
+        navigate(`/posts/${postId}`)
     }
-
+    
     return (
         <>
             <NavBar />
@@ -58,25 +61,25 @@ const App = () => {
                 {user ? (
                     <>
                         <Route
-                            path='/hoots'
-                            element={<HootList hoots={hoots} />}
+                            path='/posts'
+                            element={<PostList posts={posts} />}
                         />
                         <Route
-                            path='/hoots/:hootId'
+                            path='/posts/:postId'
                             element={
-                                <HootDetails
-                                    handleDeleteHoot={handleDeleteHoot}
+                                <PostDetails
+                                    handleDeletePost={handleDeletePost}
                                 />
                             }
                         />
                         <Route
-                            path='/hoots/new'
-                            element={<HootForm handleAddHoot={handleAddHoot} />}
+                            path='/posts/new'
+                            element={<PostForm handleAddPost={handleAddPost} />}
                         />
                         <Route
-                            path='/hoots/:hootId/edit'
+                            path='/posts/:postId/edit'
                             element={
-                                <HootForm handleUpdateHoot={handleUpdateHoot} />
+                                <PostForm handleUpdatePost={handleUpdatePost} />
                             }
                         />
                     </>
