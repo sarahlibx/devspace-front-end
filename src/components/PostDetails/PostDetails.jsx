@@ -24,17 +24,22 @@ const PostDetails = ({ handleDeletePost }) => {
             postId,
             commentFormData,
         )
-        setPost({ ...post, comments: [newComment, ...post.comments] })
-        console.log('commentFormData -->', commentFormData)
+        setPost({ 
+            ...post, 
+            comments: [newComment, ...post.comments] })
+            console.log('commentFormData -->', commentFormData)
     }
 
     const handleDeleteComment = async (commentId) => {
+        console.log("POST ID (from params):", postId);
+        console.log("COMMENT ID (from button):", commentId);
+
         if (!commentId) {
         console.error("No commentId provided to delete function!");
         return;
     }
 
-        const response = await postService.deleteComment(commentId);
+        const response = await postService.deleteComment(postId, commentId);
     
         if (!response.error) {
             // Filter out the deleted comment from the local state
@@ -80,17 +85,20 @@ const PostDetails = ({ handleDeletePost }) => {
 
                 {!post.comments.length && <p>There are no comments.</p>}
 
-                {post.comments.map((comment) => (
+                {post.comments.map((comment) => {
+                    console.log('rendering comment object:', comment);
+                    return (
                     <article key={comment.comment_id || comment.id}>
                             <p>{comment.author_username}: {comment.comment_text || comment.content}</p>
                             {console.log('This comment object:', comment)}
                     {Number(comment.user_id) === Number(user.id) && (
-                        <button onClick={() => handleDeleteComment(comment.id)}>
+                        <button onClick={() => handleDeleteComment(comment.id || comment.comment_id)}>
                             Delete Comment
                         </button>
                     )}
                     </article>
-                ))}
+                    );
+                })}
             </section>
         </main>
     )
