@@ -15,10 +15,13 @@ const NavBar = () => {
                         <Link to='/'>HOME</Link>
                     </li>
                     <li>
-                        <Link to='/posts'>POSTS</Link>
+                        <Link to='/posts'>Dev Network</Link>
                     </li>
                     <li>
-                        <Link to='/posts/new'>NEW POST</Link>
+                        <Link to='/posts/new'>Add Post</Link>
+                    </li>
+                    <li>
+                        <Link to={`/users/${user.id}/profile`}>My DevSpace</Link>
                     </li>
                     <li>
                         <Link to='/' onClick={handleSignOut}>

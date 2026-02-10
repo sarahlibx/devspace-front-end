@@ -6,6 +6,8 @@ import SignUpForm from './components/SignUpForm/SignUpForm.jsx'
 import SignInForm from './components/SignInForm/SignInForm.jsx'
 import Landing from './components/Landing/Landing.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
+import ProfilePage from './components/ProfilePage/ProfilePage.jsx'
+import ProfileForm from './components/ProfileForm/ProfileForm.jsx'
 import { UserContext } from './contexts/UserContext.jsx'
 
 import * as postService from './services/postService.js'
@@ -60,6 +62,7 @@ const App = () => {
                 <Route path='/' element={user ? <Dashboard /> : <Landing />} />
                 {user ? (
                     <>
+                        {/* GLOBAL WALL re: postService */}
                         <Route
                             path='/posts'
                             element={<PostList posts={posts} />}
@@ -81,6 +84,16 @@ const App = () => {
                             element={
                                 <PostForm handleUpdatePost={handleUpdatePost} />
                             }
+                        />
+                        {/* USER PROFILE devspace page */}
+                        <Route 
+                            path="/users/:userId/profile" 
+                            element={<ProfilePage />} 
+                        />
+                        {/* EDIT PROFILE devspace info */}
+                        <Route
+                            path='users/:userId/edit'
+                            element={<ProfileForm />}
                         />
                     </>
                 ) : (
