@@ -6,8 +6,11 @@ import SignUpForm from './components/SignUpForm/SignUpForm.jsx'
 import SignInForm from './components/SignInForm/SignInForm.jsx'
 import Landing from './components/Landing/Landing.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
+
 import ProfilePage from './components/ProfilePage/ProfilePage.jsx'
 import ProfileForm from './components/ProfileForm/ProfileForm.jsx'
+import SearchPage from './components/SearchPage/SearchPage.jsx'
+
 import { UserContext } from './contexts/UserContext.jsx'
 
 import * as postService from './services/postService.js'
@@ -85,6 +88,7 @@ const App = () => {
                                 <PostForm handleUpdatePost={handleUpdatePost} />
                             }
                         />
+                        <Route path="/search" element={<SearchPage />} />
                         {/* USER PROFILE devspace page */}
                         <Route 
                             path="/users/:userId/profile" 
@@ -95,6 +99,8 @@ const App = () => {
                             path='users/:userId/edit'
                             element={<ProfileForm />}
                         />
+                        {/* TEST ROUTE profile view of other users */}
+                        <Route path="/profiles/:userId" element={<ProfilePage />} />
                     </>
                 ) : (
                     <>

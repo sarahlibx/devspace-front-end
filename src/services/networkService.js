@@ -13,4 +13,17 @@ const getNetworkData = async (userId) => {
     }
 };
 
-export { getNetworkData };
+const searchUsers = async (query) => {
+    try {
+        const res = await fetch(`${BASE_URL}/search/${query}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+};
+
+export { getNetworkData, searchUsers };
+

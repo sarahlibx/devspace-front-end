@@ -18,6 +18,9 @@ const NavBar = () => {
                         <Link to='/posts'>Dev Network</Link>
                     </li>
                     <li>
+                        <Link to="/search">Find Friends</Link>
+                    </li>
+                    <li>
                         <Link to='/posts/new'>Add Post</Link>
                     </li>
                     <li>
