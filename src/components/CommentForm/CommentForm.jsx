@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Form, Button, Card } from 'react-bootstrap';
 
 const CommentForm = ({ handleAddComment }) => {
   const [formData, setFormData] = useState({ content: '' });
@@ -9,24 +10,49 @@ const CommentForm = ({ handleAddComment }) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // add handleAddComment
     handleAddComment(formData)
     setFormData({ content: '' });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor='text-input'>Your comment:</label>
-      <textarea
-        required
-        type='text'
-        name='content'
-        id='content-input'
-        value={formData.content}
-        onChange={handleChange}
-      />
-      <button type='submit'>SUBMIT COMMENT</button>
-    </form>
+    <Card className='mb-4 shadow-sm border-0 bg-light'>
+      <Card.Body>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className='mb-3'>
+          <Form.Label htmlFor='text-input'>Join the Conversation...</Form.Label>
+            <Form.Control
+              as='textarea'
+              rows={3}
+              required
+              name='content'
+              id='content-input'
+              placeholder='What are your thoughts?'
+              value={formData.content}
+              onChange={handleChange}
+              className='border-0 shadow-none'
+            />
+          </Form.Group>
+
+            {/* ACTION BUTTONS */}
+            <div className="d-flex justify-content-end gap-3">
+              <Button 
+                type='submit'
+                className='rounded-pill px-4 fw-bold text-white'
+                style={{ backgroundColor: '#00096B', border: 'none' }}
+              >
+                Add Comment</Button>
+              <Button 
+                variant='outline-secondary' 
+                onClick={() => navigate(-1)} 
+                className="rounded-pill px-4"
+              >
+                Cancel
+              </Button>
+            </div>
+        </Form>
+      </Card.Body>
+    </Card> 
+    
   );
 };
 

@@ -1,9 +1,8 @@
 import { useParams, Link } from 'react-router'
 import { useState, useEffect, useContext } from 'react'
-
+import { Container, Card, Button, Badge } from 'react-bootstrap';
 import * as postService from '../../services/postService'
 import { UserContext } from '../../contexts/UserContext'
-
 import CommentForm from '../CommentForm/CommentForm'
 
 const PostDetails = ({ handleDeletePost }) => {
@@ -50,7 +49,7 @@ const PostDetails = ({ handleDeletePost }) => {
         }
     };
 
-    if (!post) return <main>Loading...</main>
+    if (!post) return <Container className="mt-5 text-center"><h3>Loading DevPost...</h3></Container>;
     console.log(post)
 
     console.log('Post Author ID:', post.user_id);
@@ -58,50 +57,89 @@ const PostDetails = ({ handleDeletePost }) => {
     console.log('Do they match?', post.user_id === user.id);
     
     return (
-        <main>
-            <section>
-                <header>
-                    <h1>Post #{post.id}</h1>
-                    <p>
-                        {`${post.author_username} posted on
-                        ${new Date(post.created_at).toLocaleDateString()}`}
-                    </p>
+        <Container className='mt-5 mb-5'>
+            {/* MAIN POST SECTION */}
+            <Card className='shadow-sm border-0 mb-5'>
+                <Card.Body className='p-4'>
+                    <div className="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h1>Post #{post.id}</h1>
+                            <p>
+                                {`${post.author_username} posted on
+                                ${new Date(post.created_at).toLocaleDateString()}`}
+                            </p>
+                        </div>
                     
-                    {Number(post.user_id) === Number(user.id) && (
-                        <>
-                            <Link to={`/posts/${postId}/edit`}>Edit</Link>
-                            <button onClick={() => handleDeletePost(postId)}>
-                                Delete Post
-                            </button>
-                        </>
-                    )}
-                </header>
-                <p>{post.content}</p>
-            </section>
+                        {Number(post.user_id) === Number(user.id) && (
+                            <>
+                            <div className="d-flex gap-2">
+                                <Link 
+                                    className="btn btn-outline-secondary rounded-pill px-3"
+                                    to={`/posts/${postId}/edit`}>Edit</Link>
+                                <Button 
+                                    variant="outline-danger" 
+                                    size="sm" 
+                                    className="rounded-pill px-3" 
+                                    onClick={() => handleDeletePost(postId)}
+                                >
+                                    Delete Post
+                                </Button>
+                            </div>
+                            </>
+                        )}
+                    </div>
+                    <hr />
+                    <Card.Text sryle={{ fontSize: '1.2rem', lineHeight: '1.6' }}>
+                        {post.content}
+                    </Card.Text>
+                </Card.Body>
+            </Card>
 
-            <section>
-                <h2>Comments</h2>
+            {/* COMMENTS SECTION */}
+            <section style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <h3 className="mb-4 fw-bold">
+                    Comments 
+                    <Badge 
+                        bg="secondary" 
+                        className="ms-2"
+                    >
+                        {post.comments.length}
+                    </Badge>
+                </h3>
+
                 <CommentForm handleAddComment={handleAddComment} />
 
-                {!post.comments.length && <p>There are no comments.</p>}
+                {!post.comments.length && <p className="text-muted text-center py-4">There are no comments.</p>}
 
                 {post.comments.map((comment) => {
                     console.log('rendering comment object:', comment);
                     return (
-                    <article key={comment.comment_id || comment.id}>
-                            <p>{comment.author_username}: {comment.comment_text || comment.content}</p>
-                            {console.log('This comment object:', comment)}
-                    {Number(comment.user_id) === Number(user.id) && (
-                        <button onClick={() => handleDeleteComment(comment.id || comment.comment_id)}>
-                            Delete Comment
-                        </button>
-                    )}
-                    </article>
+                    <Card key={comment.comment_id || comment.id} className="mb-3 border-0 shadow-sm">
+                        <Card.Body className='p-3'>
+                            <div className='d-flex justify-content-between align-items-center'>
+                                <div>
+                                    <span className='fw-bold text-primary'>{comment.author_username}:</span>
+                                    <p className='mb-0 mt-1'>{comment.comment_text || comment.content}</p>
+                                    {console.log('This comment object:', comment)}
+                                </div>
+
+                                {Number(comment.user_id) === Number(user.id) && (
+                                <Button 
+                                    variant='link'
+                                    className='text-danger text-decoration-none p-0'
+                                    onClick={() => handleDeleteComment(comment.id || comment.comment_id)}
+                                >
+                                    Delete Comment
+                                </Button>
+                            )}
+                            </div>
+                        </Card.Body>
+                    </Card>
                     );
                 })}
             </section>
-        </main>
-    )
-}
+        </Container>
+    );
+};
 
-export default PostDetails
+export default PostDetails;

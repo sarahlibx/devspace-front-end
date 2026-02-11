@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { Form, Button, Container, Card, Row, Col, CardHeader } from 'react-bootstrap';
 import * as profileService from '../../services/profileService';
 
 const ProfileForm = ({ existingData, onSuccess }) => {
+    const { userId } = useParams();
+    const navigate = useNavigate();
+    
     const [formData, setFormData] = useState({
         bio_quote: '',
         fun_fact: '',
@@ -13,7 +18,7 @@ const ProfileForm = ({ existingData, onSuccess }) => {
         github_link: '',
         linkedin_link: ''
     });
-
+    
     // prefill form with data if user has profile
     useEffect(() => {
         if (existingData) {
@@ -40,48 +45,161 @@ const ProfileForm = ({ existingData, onSuccess }) => {
         try {
             const updatedProfile = await profileService.updateDevSpace(formData);
             if (onSuccess) onSuccess(updatedProfile);
-            alert('DevSpace updated successfully!');
+            navigate(`/users/${userId}/profile`);
         } catch (err) {
             console.error('Failed to update profile', err);
         }
     }
 
     return (
-        <form onSubmit={handleSubmit} className="profile-form">
-            <h2>Customize your DevSpace</h2>
-            
-            <section>
-                <h3>The Basics</h3>
-                <label>Bio Quote (140 chars)</label>
-                <textarea 
-                    name="bio_quote"
-                    maxLength="140"
-                    value={formData.bio_quote}
-                    onChange={handleChange}
-                    placeholder="Something witty..."
-                />
-                <small>{renderCounter(formData.bio_quote, 140)}</small>
-            </section>
+        <Container>
+            <Row className='justify-content-center'>
+                <Col md={10} lg={8}>
+                    <Card className='shadow-sm border-0 bg-transparent'>
+                        <Card.Body className='p-5'>
+                            <Card.Title>Customize Your DevSpace</Card.Title>
+                        
+                            <Form onSubmit={handleSubmit} className="profile-form">
 
-            <section>
-                <h3>Interests (100 chars max each)</h3>
-                <input name="fun_fact" placeholder="Fun Fact" maxLength="100" value={formData.fun_fact} onChange={handleChange} />
-                <input name="fav_band" placeholder="Favorite Band" maxLength="100" value={formData.fav_band} onChange={handleChange} />
-                <input name="fav_book" placeholder="Favorite Book" maxLength="100" value={formData.fav_book} onChange={handleChange} />
-                <input name="hobbies" placeholder="Hobbies" maxLength="100" value={formData.hobbies} onChange={handleChange} />
-                <input name="fav_language" placeholder="Favorite Coding Language" maxLength="100" value={formData.fav_language} onChange={handleChange} />
-                {renderCounter(formData.fun_fact, 100)}
-            </section>
+                            {/* BIO CARD */}
+                            <Card className='mb-4 shadow-sm'>
+                                <Card.Header className="bg-white fw-bold">The Basics</Card.Header>
+                                <Card.Body>
+                                    <Form.Group>
+                                        <Form.Label>Bio Quote</Form.Label>
+                                            <Form.Control 
+                                                name="bio_quote"
+                                                maxLength="140"
+                                                value={formData.bio_quote}
+                                                onChange={handleChange}
+                                                placeholder="Something witty... *"
+                                            />
+                                            <Form.Text className='text-muted d-block text-end'> {renderCounter(formData.bio_quote, 140)}
+                                            </Form.Text>
+                                    </Form.Group>
+                                </Card.Body>
+                            </Card>
 
-            <section>
-                <h3>Contact Info (Optional)</h3>
-                <input name="email" type="email" placeholder="Public Email" value={formData.email} onChange={handleChange} />
-                <input name="github_link" placeholder="GitHub URL" value={formData.github_link} onChange={handleChange} />
-                <input name="linkedin_link" placeholder="LinkedIn URL" value={formData.linkedin_link} onChange={handleChange} />
-            </section>
+                            {/* INTERESTS CARD */}
+                            <Card className='mb-4 shadow-sm'>
+                                <Card.Header className="bg-white fw-bold">Interests</Card.Header>
+                                <Card.Body>
+                                    <Row>
+                                        <Col md={6} className='mb-3'>
+                                            <Form.Control 
+                                                name="fun_fact" 
+                                                placeholder="Fun Fact *" 
+                                                maxLength="100" 
+                                                value={formData.fun_fact} 
+                                                onChange={handleChange} 
+                                            />
+                                            <Form.Text className='text-muted d-block text-end'>
+                                                {renderCounter(formData.fun_fact, 100)}
+                                            </Form.Text>
+                                        </Col>
+                                        
+                                        <Col md={6} className='mb-3'>
+                                            <Form.Control
+                                                name="fav_band" 
+                                                placeholder="Favorite Band *" 
+                                                maxLength="100" 
+                                                value={formData.fav_band} 
+                                                onChange={handleChange} 
+                                            />
+                                            <Form.Text className='text-muted d-block text-end'>
+                                                {renderCounter(formData.fav_band, 100)}
+                                            </Form.Text>
+                                        </Col> 
 
-            <button type="submit">Save DevSpace</button>
-        </form>
+                                        <Col md={6} className='mb-3'>
+                                            <Form.Control 
+                                                name="fav_book" 
+                                                placeholder="Favorite Book *" 
+                                                maxLength="100" 
+                                                value={formData.fav_book} 
+                                                onChange={handleChange} 
+                                            />
+                                            <Form.Text className='text-muted d-block text-end'>
+                                                {renderCounter(formData.fav_book, 100)}
+                                            </Form.Text>
+                                        </Col>
+
+                                        <Col md={6} className='mb-3'>
+                                            <Form.Control 
+                                                name="fav_language" 
+                                                placeholder="Favorite Coding Language *" 
+                                                maxLength="100" 
+                                                value={formData.fav_language} 
+                                                onChange={handleChange} />
+                                            <Form.Text className='text-muted d-block text-end'>
+                                                {renderCounter(formData.fav_language, 100)}
+                                            </Form.Text>
+                                        </Col>
+
+                                        <Col md={12} className='mb-3'>
+                                            <Form.Control 
+                                                name="hobbies" 
+                                                placeholder="Hobbies *" 
+                                                maxLength="100" 
+                                                value={formData.hobbies} 
+                                                onChange={handleChange} 
+                                            />
+                                            <Form.Text className='text-muted d-block text-end'>
+                                                {renderCounter(formData.hobbies, 100)}
+                                            </Form.Text>
+                                        </Col>
+                                        
+                                    </Row>
+                                </Card.Body>
+                            </Card>
+
+                            {/* CONTACT CARD */}
+                            <Card className='mb-4 shadow-sm'>
+                                <Card.Header>Contact Info</Card.Header>
+                                <Card.Body>
+                                    <Form.Group>
+                                        <Form.Control className='mb-3'
+                                            name="email" 
+                                            type="email" 
+                                            placeholder="Public Email *" 
+                                            value={formData.email} 
+                                            onChange={handleChange} 
+                                        />
+
+                                        <Form.Control className='mb-3'
+                                            name="github_link" 
+                                            type='url'
+                                            placeholder="GitHub URL *" 
+                                            value={formData.github_link} 
+                                            onChange={handleChange} 
+                                        />
+                
+                                        <Form.Control className='mb-3'
+                                            name="linkedin_link" 
+                                            type='url'
+                                            placeholder="LinkedIn URL *" 
+                                            value={formData.linkedin_link} 
+                                            onChange={handleChange} 
+                                        />
+                                    </Form.Group>
+                                </Card.Body>
+                            </Card>
+                            
+                                {/* ACTION BUTTONS */}
+                                <div className="d-flex gap-3 mt-4 justify-content-center">
+                                    <Button variant="primary" type="submit" className="rounded-pill px-5 fw-bold" style={{ backgroundColor: '#00096b' }}>
+                                        Save Changes
+                                    </Button>
+                                    <Button variant="outline-secondary" className="rounded-pill px-5 fw-bold" onClick={() => navigate(-1)}>
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 
