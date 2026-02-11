@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router';
-import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Card, Container, Row, Col, Alert } from 'react-bootstrap';
 import { signIn } from '../../services/authService'
 import { UserContext } from '../../contexts/UserContext'
 
@@ -37,7 +37,11 @@ const SignInForm = () => {
                     <Card className="shadow-sm border-0 mt-5">
                         <Card.Body className='p-4'>
                             <h2 className='text-center fw-bold mb-4'>Sign In</h2>
-                                <p>{message}</p>
+                                {message && (
+                                    <Alert variant="danger" className="py-2 text-center small">
+                                        {message}
+                                    </Alert>
+                                )}
                             <Form onSubmit={handleSubmit}>
                                 <Form.Group className='mb-3'>
                                     <Form.Label className='small fw-bold'>Username:</Form.Label>
