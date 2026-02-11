@@ -10,7 +10,7 @@ const SearchPage = () => {
         const val = e.target.value;
         setQuery(val);
 
-        if (val.length > 1) {
+        if (val.trim().length >= 3) {
             const data = await networkService.searchUsers(val);
             setResults(data);
         } else {

@@ -24,15 +24,17 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  display: block;
+  place-items: unset;
   min-width: 320px;
   min-height: 100vh;
+  font-family: "Rubik", sans-serif;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: "Varela Round", sans-serif;
 }
 
 button {
