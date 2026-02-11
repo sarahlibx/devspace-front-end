@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
-
+import { useNavigate, useParams } from "react-router";
+import { Form, Button, Container, Card } from 'react-bootstrap';
 import * as postService from "../../services/postService";
 
 const PostForm = ({ handleAddPost, handleUpdatePost }) => {
   const { postId } = useParams();
+  const navigate = useNavigate();
   // console.log(postId);
   const [formData, setFormData] = useState({
     content: "",
@@ -31,28 +32,42 @@ const PostForm = ({ handleAddPost, handleUpdatePost }) => {
     console.log("formData", formData);
     if (postId) {
       handleUpdatePost(postId, formData);
+      navigate('/posts');
     } else {
       handleAddPost(formData);
+      navigate('/posts');
     }
   };
 
   return (
-    <main>
-      <h1>{postId ? "Edit Post" : "New Post"}</h1>
-      <form onSubmit={handleSubmit}>
-        
-        <label htmlFor="content-input">What's on your mind?</label>
-        <textarea
-          required
-          name="content" // Matches state key and backend data['content']
-          id="content-input"
-          value={formData.content}
-          onChange={handleChange}
-        />
-        
-        <button type="submit">SUBMIT</button>
-      </form>
-    </main>
+    <Container className="mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-8 col-lg-6">
+          <Card className="shadow-sm">
+            <Card.Body className="p-4">
+              <Card.Title className="mb-4 fw-bold">{postId ? "Edit Post" : "New Post"}</Card.Title>
+
+              <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3">
+                  <Form.Label>What's on your mind?</Form.Label>
+                  <Form.Control
+                    required
+                    name="content" // Matches state key and backend data['content']
+                    id="content-input"
+                    value={formData.content}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <div className="d-flex gap-3 justify-content-center">
+                  <Button variant='primary' type='submit' className="rounded-pill px-4">Post to Network</Button>
+                  <Button variant='outline-secondary' onClick={() => navigate(-1)} className="rounded-pill px-4">Cancel</Button>
+                </div>
+            </Form>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
+    </Container>
   );
 };
 
