@@ -1,0 +1,9 @@
+body {
+    background-color: white;
+    background-image: none;
+}
+
+.landing-logo {
+    width: 600px;
+    height: auto;
+}
