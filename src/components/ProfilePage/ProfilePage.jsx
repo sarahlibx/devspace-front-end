@@ -8,6 +8,7 @@ import * as postService from '../../services/postService';
 import { UserContext } from '../../contexts/UserContext';
 import { formatDate } from '../../utils/formatDate';
 import PostForm from '../PostForm/PostForm'; 
+import defaultAvatar from '../../assets/no-picture-avatar.jpg';
 
 const ProfilePage = ({ handleAddPost }) => {
     const { userId } = useParams();
@@ -93,17 +94,19 @@ const ProfilePage = ({ handleAddPost }) => {
                     <h2 className='fw-bold' style={{ fontFamily: 'Varela Round' }}>{networkData.user.username}'s Space</h2>
                         {/* Show Edit Button if it's the owner */}
                         {isOwner && (
-                            <button onClick={() => navigate(`/users/${userId}/edit`)}>
+                            <Link className="small text-muted text-decoration-none" to={(`/users/${userId}/edit`)}>
                                 Edit Profile
-                            </button>
+                            </Link>
                         )}
-                        <div className="position-relative d-inline-block mx-auto mb-3">
+                        <div className="position-relative d-inline-block mx-auto mb-3 mt-3">
                             <Image 
-                                src={devSpaceData?.photo || "https://via.placeholder.com/150"} 
+                                src={devSpaceData?.profile_picture_url || defaultAvatar} 
+                                alt='profile picture'
                                 rounded 
-                                width="150" 
-                                height="150" 
+                                width="auto" 
+                                height="175" 
                                 className="border"
+                                style={{ objectFit: 'cover' }}
                             />
                             {/* Online Now Indicator */}
                             <div className="mt-2 text-success small fw-bold">
@@ -179,7 +182,7 @@ const ProfilePage = ({ handleAddPost }) => {
                 {networkData.posts && networkData.posts.length > 0 ? (
                     <div className='posts-container'>
                         {networkData.posts.map((post) => (
-                        <article key={post.id} className='post-card p-5 bg-white rounded text-center text-muted mb-3'>
+                        <article key={post.id} className='post-card p-4 bg-white rounded text-center text-muted mb-3'>
                             <h4>{post.title}</h4>
                             <p>{post.content}</p>
                             <small>Posted on {formatDate(post.created_at)}</small>
@@ -192,8 +195,8 @@ const ProfilePage = ({ handleAddPost }) => {
                 )}
             </section>
 
-            <section className='friends-list'>
-                <h3 className='bg-secondary text-white p-2 h6 mb-3'>Friends ({networkData.friend_count})</h3>
+            <section className='friends-list mb-3'>
+                <h3 className='bg-secondary text-white p-2 h6 mb-3'>My Top 8! | Total Friends: {networkData.friend_count}</h3>
                 <Row className='friends-grid g-3'>
                     {networkData.friends.slice(0, 8).map((friend) => (
                     <Col xs={3} key={friend.id} className='friend-item text-center'>

@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { Form, Button, Container, Card, Row, Col, CardHeader } from 'react-bootstrap';
+import { Form, Button, Container, Card, Row, Col, CardHeader, Image } from 'react-bootstrap';
 import * as profileService from '../../services/profileService';
+import defaultAvatar from '../../assets/no-picture-avatar.jpg';
 
 const ProfileForm = ({ existingData, onSuccess }) => {
     const { userId } = useParams();
     const navigate = useNavigate();
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(defaultAvatar);
     
     const [formData, setFormData] = useState({
         bio_quote: '',
@@ -19,15 +22,66 @@ const ProfileForm = ({ existingData, onSuccess }) => {
         linkedin_link: ''
     });
     
+    // fetch data if existingData is not provided
+    useEffect(() => {
+        const fetchProfile = async () => {
+            // Only fetch if we don't have existingData and we have a userId
+            if (!existingData && userId) {
+                try {
+                    const data = await profileService.getDevSpaceData(userId);
+                    if (data) {
+                        setFormData({
+                            bio_quote: data.bio_quote || '',
+                            fun_fact: data.fun_fact || '',
+                            fav_band: data.fav_band || '',
+                            fav_book: data.fav_book || '',
+                            hobbies: data.hobbies || '',
+                            fav_language: data.fav_language || '',
+                            email: data.email || '',
+                            github_link: data.github_link || '',
+                            linkedin_link: data.linkedin_link || ''
+                        });
+                        if (data.profile_picture_url) {
+                            setPreviewUrl(data.profile_picture_url);
+                        } else {
+                            // A standard default avatar
+                            setPreviewUrl(defaultAvatar);
+                        }
+                    }
+                } catch (err) {
+                    console.error("Error fetching profile for edit:", err);
+                }
+            }
+        };
+
+        fetchProfile();
+    }, [userId, existingData]);
+
     // prefill form with data if user has profile
     useEffect(() => {
-        if (existingData) {
+        // Only run if existingData isn't null/undefined
+        if (existingData && Object.keys(existingData).length > 0) {
+            console.log("Pre-filling form with:", existingData);
             setFormData(existingData);
+        
+            // Also set the image preview if it exists
+            if (existingData.profile_picture_url) {
+                setPreviewUrl(existingData.profile_picture_url || defaultAvatar);
+            }
         }
     }, [existingData]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    // for profile picture
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setSelectedFile(file);
+            setPreviewUrl(URL.createObjectURL(file));
+        }
     };
 
     // helper for the counter char limits
@@ -43,7 +97,20 @@ const ProfileForm = ({ existingData, onSuccess }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const updatedProfile = await profileService.updateDevSpace(formData);
+            // new package that accepts text & images
+            const data = new FormData();
+            // append the file if user picked one
+            if (selectedFile) {
+                data.append('photo', selectedFile);
+            }
+            // append text fields from state
+            Object.keys(formData).forEach((key) => {
+                data.append(key, formData[key]);
+            });
+
+            // send data FormData instead of formData object
+            const updatedProfile = await profileService.updateDevSpace(data);
+
             if (onSuccess) onSuccess(updatedProfile);
             navigate(`/users/${userId}/profile`);
         } catch (err) {
@@ -57,9 +124,37 @@ const ProfileForm = ({ existingData, onSuccess }) => {
                 <Col md={10} lg={8}>
                     <Card className='shadow-sm border-0 bg-transparent'>
                         <Card.Body className='p-5'>
-                            <Card.Title>Customize Your DevSpace</Card.Title>
+                            <Card.Title className='bg-white'>Customize Your DevSpace</Card.Title>
                         
                             <Form onSubmit={handleSubmit} className="profile-form">
+                            
+                            {/* PHOTO UPLOAD SECTION */}
+                            <div className="text-center mb-4">
+                                <label htmlFor="profile_picture_url" style={{ cursor: 'pointer' }}>
+                                    <div className='position-relative d-inline-block'>
+                                        <Image 
+                                            src={previewUrl || "https://via.placeholder.com/150"} 
+                                            rounded 
+                                            width="auto" 
+                                            height="175" 
+                                            className="border shadow-sm mb-2"
+                                            style={{ objectFit: 'cover' }}
+                                        />
+                                        <div className="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle p-2 shadow-sm" style={{ transform: 'translate(25%, 25%)' }}>
+                                            <small>✎</small>
+                                        </div>
+                                    </div>
+                                    <p className="text-primary fw-bold small mt-2">Change Profile Photo</p>
+                                </label>
+                                <Form.Control 
+                                    id="profile_picture_url"
+                                    name='profile_picture_url'
+                                    type="file" 
+                                    accept="image/*" 
+                                    onChange={handleFileChange} 
+                                    className="d-none"
+                                />
+                            </div>
 
                             {/* BIO CARD */}
                             <Card className='mb-4 shadow-sm'>

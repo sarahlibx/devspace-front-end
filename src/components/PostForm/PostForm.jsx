@@ -52,7 +52,7 @@ const PostForm = ({ handleAddPost, handleUpdatePost, shouldNavigate = true, isPr
 
   const formContent = (
     <Form onSubmit={handleSubmit} className="p-3">
-      <Form.Group className="mb-2">
+      <Form.Group className="mb-3">
           <Form.Label>What's on your mind?</Form.Label>
           <Form.Control
             required
