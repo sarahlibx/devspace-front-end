@@ -45,7 +45,7 @@ const PostForm = ({ handleAddPost, handleUpdatePost }) => {
         <div className="col-md-8 col-lg-6">
           <Card className="shadow-sm">
             <Card.Body className="p-4">
-              <Card.Title className="mb-4 fw-bold">{postId ? "Edit Post" : "New Post"}</Card.Title>
+              <Card.Title className="mb-4 fw-bold" style={{ fontFamily: 'Varela Round'}}>{postId ? "Edit Post" : "New Post"}</Card.Title>
 
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">

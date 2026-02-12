@@ -19,7 +19,7 @@ const Landing = () => {
                                         to="/sign-in" 
                                         variant="outline-dark" 
                                         size="lg" 
-                                        className="rounded-pill px-5 fw-bold"
+                                        className="connect-btn rounded-pill px-5 fw-bold"
                                     >
                                         Connect
                                     </Button>

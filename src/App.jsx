@@ -1,6 +1,6 @@
 import './App.css'
 import { useContext, useEffect, useState } from 'react'
-import { Routes, Route, useNavigate } from 'react-router'
+import { Routes, Route, useNavigate, useLocation } from 'react-router'
 import NavBar from './components/NavBar/Navbar.jsx'
 import SignUpForm from './components/SignUpForm/SignUpForm.jsx'
 import SignInForm from './components/SignInForm/SignInForm.jsx'
@@ -23,6 +23,7 @@ const App = () => {
     const { user } = useContext(UserContext)
     const [posts, setPosts] = useState([])
     const navigate = useNavigate()
+    const location = useLocation()
     console.log(posts)
 
     useEffect(() => {
@@ -33,6 +34,9 @@ const App = () => {
         }
         if (user) fetchAllPosts()
     }, [user])
+
+    // checking current path for background image display
+    const isLandingPage = location.pathname === '/';
 
     const handleAddPost = async (postFormData) => {
         const newPost = await postService.create(postFormData)
@@ -60,6 +64,7 @@ const App = () => {
     
     return (
         <>
+        <div className={isLandingPage ? 'no-bg' : 'app-bg-container'}>
             <NavBar />
             <Routes>
                 <Route path='/' element={user ? <Dashboard /> : <Landing />} />
@@ -109,6 +114,7 @@ const App = () => {
                     </>
                 )}
             </Routes>
+        </div> 
         </>
     )
 }

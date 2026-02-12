@@ -43,7 +43,7 @@ const SignUpForm = () => {
                 <Col md={6} lg={5}>
                     <Card className='shadow-sm border-0 mt-5'>
                         <Card.Body className='p-4'>
-                            <h2 className='text-center fw-bold mb-4'>Sign Up</h2>
+                            <h2 className='text-center fw-bold mb-4' style={{ fontFamily: 'Varela Round'}}>Sign Up</h2>
                                 {message && (
                                     <Alert variant="danger" className="py-2 text-center small">
                                         {message}

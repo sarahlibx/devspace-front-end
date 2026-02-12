@@ -36,7 +36,7 @@ const SignInForm = () => {
                 <Col md={6} lg={5}>
                     <Card className="shadow-sm border-0 mt-5">
                         <Card.Body className='p-4'>
-                            <h2 className='text-center fw-bold mb-4'>Sign In</h2>
+                            <h2 className='text-center fw-bold mb-4' style={{ fontFamily: 'Varela Round'}}>Sign In</h2>
                                 {message && (
                                     <Alert variant="danger" className="py-2 text-center small">
                                         {message}
@@ -86,7 +86,7 @@ const SignInForm = () => {
                                     Cancel
                                 </Button>
                                 
-                                <p className="text-center small text-muted">
+                                <p className="text-center small text-muted mt-3">
                                     New to DevSpace? <Link to="/sign-up" className="text-primary text-decoration-none fw-bold">Join now</Link>
                                 </p>
                             </Form>

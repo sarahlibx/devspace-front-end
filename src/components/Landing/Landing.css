@@ -1,9 +1,13 @@
-body {
-    background-color: white;
-    background-image: none;
-}
-
 .landing-logo {
     width: 600px;
     height: auto;
+}
+
+.connect-btn {
+    border: 1px solid #000000; 
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.connect-btn:hover {
+    background-color: #00096b; 
 }
