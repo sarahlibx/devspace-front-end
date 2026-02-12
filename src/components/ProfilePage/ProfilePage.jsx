@@ -4,10 +4,12 @@ import { Container, Row, Col, Card, Image, ListGroup } from 'react-bootstrap';
 import * as networkService from '../../services/networkService';
 import * as profileService from '../../services/profileService';
 import * as friendService from '../../services/friendService';
+import * as postService from '../../services/postService';
 import { UserContext } from '../../contexts/UserContext';
 import { formatDate } from '../../utils/formatDate';
+import PostForm from '../PostForm/PostForm'; 
 
-const ProfilePage = () => {
+const ProfilePage = ({ handleAddPost }) => {
     const { userId } = useParams();
     const navigate = useNavigate();
     const { user: loggedInUser } = useContext(UserContext);
@@ -61,6 +63,23 @@ const ProfilePage = () => {
         }
     }
 
+    const handleAddPostOnProfile = async (postFormData) => {
+        try {
+            const newPost = await postService.create(postFormData);
+
+            setNetworkData((prev) => ({
+                ...prev, 
+                posts: [newPost, ...prev.posts]
+            }));
+            
+            // update state
+            if (handleAddPost) handleAddPost(newPost);
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     if (loading) return <p>Loading DevSpace...</p>;
     if (!networkData) return <p>User not found.</p>
 
@@ -80,7 +99,7 @@ const ProfilePage = () => {
                         )}
                         <div className="position-relative d-inline-block mx-auto mb-3">
                             <Image 
-                                src={devSpaceData.photo || "https://via.placeholder.com/150"} 
+                                src={devSpaceData?.photo || "https://via.placeholder.com/150"} 
                                 rounded 
                                 width="150" 
                                 height="150" 
@@ -91,7 +110,7 @@ const ProfilePage = () => {
                                 <span className="me-1">●</span> Online Now!
                             </div>
                         </div>
-                        <p className="fst-italic text-muted">"{devSpaceData.bio_quote || "Hello World!"}"</p>
+                        <p className="fst-italic text-muted">"{devSpaceData?.bio_quote || "Hello World!"}"</p>
                 </Card>
                 
                 {/* Contact Links */}
@@ -142,24 +161,25 @@ const ProfilePage = () => {
             <Col md={8}>
                 {/* Post Creation (Only if it's the owner's profile) */}
                 {isOwner && (
-                    <Card className="mb-4 border-0 shadow-sm bg-light">
-                        <Card.Body>
-                            <h5 className="fw-bold">Write a new post...</h5>
-                            {/* TODO drop existing PostForm component here */}
-                        </Card.Body>
+                    <Card className="mb-4 border-0 shadow-sm bg-white overflow-hidden">
+                            <PostForm 
+                                handleAddPost={handleAddPostOnProfile} 
+                                shouldNavigate={false}
+                                isProfile={true}
+                            />
                     </Card>
                 )}
 
                 {/* User's Posts Feed */}
                 <section className='user-posts-wall mb-5'>
 
-                <h3 className='border-bottom pb-2 mb-3 fw-bold'>{networkData.user.username}'s Posts</h3>
+                <h3 className='bg-white rounded pb-2 mb-3 fw-bold'>{networkData.user.username}'s Posts</h3>
                 
                 {/* map through posts */}
                 {networkData.posts && networkData.posts.length > 0 ? (
                     <div className='posts-container'>
                         {networkData.posts.map((post) => (
-                        <article key={post.id} className='post-card'>
+                        <article key={post.id} className='post-card p-5 bg-white rounded text-center text-muted mb-3'>
                             <h4>{post.title}</h4>
                             <p>{post.content}</p>
                             <small>Posted on {formatDate(post.created_at)}</small>
@@ -173,16 +193,18 @@ const ProfilePage = () => {
             </section>
 
             <section className='friends-list'>
-                <h3>Friends ({networkData.friend_count})</h3>
-                <div className='friends-grid'>
-                    {networkData.friends.map((friend) => (
-                    <div key={friend.id} className='friend-item'>
+                <h3 className='bg-secondary text-white p-2 h6 mb-3'>Friends ({networkData.friend_count})</h3>
+                <Row className='friends-grid g-3'>
+                    {networkData.friends.slice(0, 8).map((friend) => (
+                    <Col xs={3} key={friend.id} className='friend-item text-center'>
+                        <div className="bg-light border" style={{ height: '120px', width: '100%' }}>
                         <Link to={`/users/${friend.id}/profile`}>
-                            <p>{friend.username}</p>
+                            <p className='d-block mt-1'>{friend.username}</p>
                         </Link>
-                    </div>
+                        </div>
+                    </Col>
                     ))}
-                </div>
+                </Row>
             </section>
             </Col>
             </Row>

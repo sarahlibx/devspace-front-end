@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { Form, Button, Container, Card } from 'react-bootstrap';
 import * as postService from "../../services/postService";
 
-const PostForm = ({ handleAddPost, handleUpdatePost }) => {
+const PostForm = ({ handleAddPost, handleUpdatePost, shouldNavigate = true, isProfile = false}) => {
   const { postId } = useParams();
   const navigate = useNavigate();
   // console.log(postId);
@@ -27,16 +27,50 @@ const PostForm = ({ handleAddPost, handleUpdatePost }) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     console.log("formData", formData);
-    if (postId) {
-      handleUpdatePost(postId, formData);
-      navigate('/posts');
-    } else {
-      handleAddPost(formData);
-      navigate('/posts');
+    try {
+      if (postId) {
+        // Logic for EDITING an existing post
+        await handleUpdatePost(postId, formData);
+        navigate('/posts');
+      } else {
+        // logic for CREATING a new post
+        await handleAddPost(formData);
+        if (shouldNavigate) {
+          navigate('/posts');
+        }
     }
+
+    setFormData({ title: '', content: '' });
+
+    } catch (err) {
+      console.error('Form submission error', err);
+    }
+  }
+
+  const formContent = (
+    <Form onSubmit={handleSubmit} className="p-3">
+      <Form.Group className="mb-2">
+          <Form.Label>What's on your mind?</Form.Label>
+          <Form.Control
+            required
+            name="content" // Matches state key and backend data['content']
+            id="content-input"
+            value={formData.content}
+            onChange={handleChange}
+          />
+      </Form.Group>
+      <div className="d-flex gap-3 justify-content-center">
+        <Button variant='primary' type='submit' className="rounded-pill px-4">Post to Network</Button>
+        <Button variant='outline-secondary' onClick={() => navigate(-1)} className="rounded-pill px-4">Cancel</Button>
+      </div>
+    </Form>
+  );
+
+  if (isProfile) {
+    return formContent;
   };
 
   return (
@@ -45,24 +79,8 @@ const PostForm = ({ handleAddPost, handleUpdatePost }) => {
         <div className="col-md-8 col-lg-6">
           <Card className="shadow-sm">
             <Card.Body className="p-4">
-              <Card.Title className="mb-4 fw-bold" style={{ fontFamily: 'Varela Round'}}>{postId ? "Edit Post" : "New Post"}</Card.Title>
-
-              <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                  <Form.Label>What's on your mind?</Form.Label>
-                  <Form.Control
-                    required
-                    name="content" // Matches state key and backend data['content']
-                    id="content-input"
-                    value={formData.content}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <div className="d-flex gap-3 justify-content-center">
-                  <Button variant='primary' type='submit' className="rounded-pill px-4">Post to Network</Button>
-                  <Button variant='outline-secondary' onClick={() => navigate(-1)} className="rounded-pill px-4">Cancel</Button>
-                </div>
-            </Form>
+              <Card.Title className="mb-2 fw-bold" style={{ fontFamily: 'Varela Round'}}>{postId ? "Edit Post" : "New Post"}</Card.Title>
+              {formContent}
             </Card.Body>
           </Card>
         </div>

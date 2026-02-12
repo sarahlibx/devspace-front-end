@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { Form, Button, Card } from 'react-bootstrap';
 
 const CommentForm = ({ handleAddComment }) => {
   const [formData, setFormData] = useState({ content: '' });
+  const navigate = useNavigate();
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });

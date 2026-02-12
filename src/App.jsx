@@ -41,7 +41,6 @@ const App = () => {
     const handleAddPost = async (postFormData) => {
         const newPost = await postService.create(postFormData)
         setPosts([newPost, ...posts])
-        navigate('/posts')
     }
 
     const handleDeletePost = async (postId) => {
