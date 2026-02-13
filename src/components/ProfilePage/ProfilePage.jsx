@@ -98,7 +98,7 @@ const ProfilePage = ({ handleAddPost }) => {
                                 Edit Profile
                             </Link>
                         )}
-                        <div className="position-relative d-inline-block mx-auto mb-3 mt-3">
+                        <div className="d-flex align-items-center justify-content-between mb-3 mt-3 gap-3">
                             <Image 
                                 src={devSpaceData?.profile_picture_url || defaultAvatar} 
                                 alt='profile picture'
@@ -108,12 +108,17 @@ const ProfilePage = ({ handleAddPost }) => {
                                 className="border"
                                 style={{ objectFit: 'cover' }}
                             />
-                            {/* Online Now Indicator */}
-                            <div className="mt-2 text-success small fw-bold">
-                                <span className="me-1">●</span> Online Now!
-                            </div>
+                            <p className="text-muted">"{devSpaceData?.bio_quote || "Hello World!"}"</p>
+                            
                         </div>
-                        <p className="fst-italic text-muted">"{devSpaceData?.bio_quote || "Hello World!"}"</p>
+                        {/* Online Now Indicator */}
+                            <Image 
+                                className="online-now "
+                                src="https://archive.org/download/myspaceon/myspaceon.gif"
+                                alt="online now"
+                                width='100'
+                                height='auto'
+                            />
                 </Card>
                 
                 {/* Contact Links */}
@@ -201,8 +206,23 @@ const ProfilePage = ({ handleAddPost }) => {
                     {networkData.friends.slice(0, 8).map((friend) => (
                     <Col xs={3} key={friend.id} className='friend-item text-center'>
                         <div className="bg-light border" style={{ height: '120px', width: '100%' }}>
-                        <Link to={`/users/${friend.id}/profile`}>
-                            <p className='d-block mt-1'>{friend.username}</p>
+                        <Link to={`/users/${friend.id}/profile`} className='text-decoration-none'>
+                            <div className="friend-photo-container mb-1">
+                                <Image
+                                    src={friend.profile_picture_url || defaultAvatar}
+                                    alt={friend.username}
+                                    className='border shadow-sm'
+                                    style={{
+                                        width: '100%',
+                                        height: '80px',
+                                        objectFit: 'cover'
+                                        }}    
+                                    >
+                                </Image>
+                            </div>
+                            <p className='small text-truncate' style={{ color: '#00096b' }}>
+                                {friend.username}
+                            </p>
                         </Link>
                         </div>
                     </Col>
