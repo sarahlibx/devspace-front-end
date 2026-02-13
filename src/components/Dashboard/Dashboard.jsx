@@ -21,14 +21,22 @@ const Dashboard = () => {
 
     return (
         <Container className='mt-4'>
-            <h2 className='mb-4'>Dashboard</h2>
+            <h2 className='mb-4'>Your DevSpace Dashboard</h2>
             <Row className='g-4'>
                 {/* GRID 1: my most recent post */}
                 <Col md={6}>
                     <Card className='h-100 shadow-sm border-0'>
                         <Card.Header className='bg-primary text-white'>My Latest Post:</Card.Header>
                         <Card.Body>
-
+                            {myLatestPost ? (
+                                <div>
+                                    <h5>{myLatestPost.title}</h5>
+                                    <p className="text-muted small">{formatDate(myLatestPost.created_at)}</p>
+                                    <Link to={`/posts/${myLatestPost.id}`} className='btn btn-outline-primary btn-sm'></Link>
+                                </div>
+                            ):(
+                                <p>You haven't posted anything yet!</p>
+                            )}
                         </Card.Body>
                     </Card>
                 </Col>
@@ -37,7 +45,15 @@ const Dashboard = () => {
                     <Card className='h-100 shadow-sm border-0'>
                         <Card.Header className='bg-primary text-white'>Recent Conversation:</Card.Header>
                         <Card.Body>
-                            
+                            {recentCommentedPost ? (
+                                <div>
+                                    <p className="mb-1">You commented on:</p>
+                                    <h6 className="fw-bold">{recentCommentedPost.title}</h6>
+                                    <Link to={`/posts/${recentCommentedPost.id}`} className="btn btn-outline-success btn-sm">Jump back in</Link>
+                                </div>
+                            ) : (
+                                <p>No recent comments found.</p>
+                            )}
                         </Card.Body>
                     </Card>
                 </Col>
