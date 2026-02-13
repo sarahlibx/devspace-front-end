@@ -6,7 +6,7 @@ const Landing = () => {
     return (
         <main>
             {/* HERO SECTION */}
-            <section className='py-3 mb-5 border-bottom'>
+            <section className='py-3 mb-5'>
                 <Container className='text-center py-5'>
                     <Row className='justify-content-center'>
                         <Col lg={8}>
@@ -26,7 +26,7 @@ const Landing = () => {
 
                                 <div className='justify-content-center mt-4'>
                                     <p className="text-center small text-muted">
-                                    Already a user? <Link to="/sign-in" className="text-primary text-decoration-none fw-bold">Sign in</Link>
+                                    Already a user? <Link to="/sign-in" className="text-primary text-decoration-none fw-bold landing-link">Sign in</Link>
                                     </p>
                                 </div>
                             </div>

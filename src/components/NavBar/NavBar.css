@@ -2,3 +2,16 @@
     background-color: #96969687;
     font-family: 'Varela Round', sans-serif;
 }
+
+.sign-up-btn {
+    background-color: #00096b;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 9, 107, 0.5); 
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.sign-up-btn:hover {
+    background-color: #00096b;
+    box-shadow: 0 0 20px rgba(0, 9, 107, 0.6);
+    transform: scale(1.05);
+}

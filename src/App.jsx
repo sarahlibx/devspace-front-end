@@ -6,6 +6,7 @@ import SignUpForm from './components/SignUpForm/SignUpForm.jsx'
 import SignInForm from './components/SignInForm/SignInForm.jsx'
 import Landing from './components/Landing/Landing.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
+import Footer from "./components/Footer/Footer.jsx";
 
 import ProfilePage from './components/ProfilePage/ProfilePage.jsx'
 import ProfileForm from './components/ProfileForm/ProfileForm.jsx'
@@ -38,6 +39,10 @@ const App = () => {
     // checking current path for background image display
     const isLandingPage = location.pathname === '/';
 
+    // set footer display rules
+    const hideFooterPath = ['/sign-in', '/sign-up'];
+    const showFooter = !hideFooterPath.includes(location.pathname);
+
     const handleAddPost = async (postFormData) => {
         const newPost = await postService.create(postFormData)
         setPosts([newPost, ...posts])
@@ -65,6 +70,7 @@ const App = () => {
         <>
         <div className={isLandingPage ? 'no-bg' : 'app-bg-container'}>
             <NavBar />
+            <main>
             <Routes>
                 <Route path='/' element={user ? <Dashboard /> : <Landing />} />
                 {user ? (
@@ -113,6 +119,8 @@ const App = () => {
                     </>
                 )}
             </Routes>
+            </main>
+            {showFooter && <Footer />}
         </div> 
         </>
     )

@@ -64,9 +64,8 @@ const NavBar = () => {
 
                         <Button
                             as={Link} 
-                            className="btn btn-primary rounded-pill px-4 text-white fw-bold"
+                            className="sign-up-btn btn btn-primary rounded-pill px-4 text-white fw-bold"
                             to='/sign-up'
-                            style={{ backgroundColor: '#00096b', border:'none' }}
                             >
                             Sign Up
                         </Button>

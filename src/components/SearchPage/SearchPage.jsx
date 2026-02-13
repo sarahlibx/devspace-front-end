@@ -21,7 +21,7 @@ const SearchPage = () => {
     };
 
     return (
-        <Container className="search-container mt-5">
+        <Container className="search-container mt-5 pt-5">
             <div className='row justify-content-center'>
                 <div className="col-md-8 col-lg-6">
                     <Card className="shadow-sm">
