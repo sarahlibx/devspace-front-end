@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { Button, Navbar } from 'react-bootstrap';
-import './Navbar.css';
+import './NavBar.css';
 
 const NavBar = () => {
     const { user, setUser } = useContext(UserContext);
