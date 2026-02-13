@@ -1,0 +1,15 @@
+.user-contact-links a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.85rem; 
+}
+
+/* Ensure the container doesn't explode on tiny screens */
+.user-contact-links .d-flex {
+  width: 100%;
+  min-width: 0;
+}

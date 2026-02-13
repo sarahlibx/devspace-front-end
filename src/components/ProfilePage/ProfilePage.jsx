@@ -8,7 +8,9 @@ import * as postService from '../../services/postService';
 import { UserContext } from '../../contexts/UserContext';
 import { formatDate } from '../../utils/formatDate';
 import PostForm from '../PostForm/PostForm'; 
+import DevSpacePlayer from '../DevSpacePlayer/DevSpacePlayer';
 import defaultAvatar from '../../assets/no-picture-avatar.jpg';
+import './ProfilePage.css';
 
 const ProfilePage = ({ handleAddPost }) => {
     const { userId } = useParams();
@@ -123,42 +125,38 @@ const ProfilePage = ({ handleAddPost }) => {
                 
                 {/* Contact Links */}
                 <Card className='user-contact-links mb-3 border-0 shadow-sm'>
-                    <Card.Body>
-                        <Row className='g-2 d-flex justify-content-between small'>
-                            <Col xs={6} className='d-flex justify-content-start'>
-                                <a className="text-decoration-none" href={`mailto:${devSpaceData?.email}`} target="_blank" rel="noreferrer">
+                    <Card.Body className='p-2'>
+                        <div className='d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center'>
+                                <a className="text-decoration-none d-flex align-items-center gap-1 text-nowrap" href={`mailto:${devSpaceData?.email}`} target="_blank" rel="noreferrer">
                                     <img src="../../src/assets/square-envelope-solid-full.svg" alt="Email Me" style={{ width:"30px", height:"auto"}}></img>
                                     Message Me
                                 </a>
-                            </Col>
-                            <Col xs={6} className='d-flex justify-content-end'>
-                                <a className="text-decoration-none" href={devSpaceData?.github_link} target="_blank">
+                                <a className="text-decoration-none d-flex align-items-center gap-1 text-nowrap" href={devSpaceData?.github_link} target="_blank">
                                     <img src="../../src/assets/square-github-brands-solid-full.svg" alt="GitHub Link" style={{ width:"30px", height:"auto"}}></img>
                                     Connect on GitHub
                                 </a>
-                            </Col>
-                            <Col xs={6} className='d-flex justify-content-start'>
-                                <a className="text-decoration-none" href={devSpaceData?.linkedin_link} target="_blank">
+                        </div>
+                        <div className='d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center'>
+                                <a className="text-decoration-none d-flex align-items-center gap-1 text-nowrap" href={devSpaceData?.linkedin_link} target="_blank">
                                     <img src="../../src/assets/square-linkedin-brands-solid-full.svg" alt="LinkedIn" style={{ width:"30px", height:"auto"}}></img>
                                     Add on LinkedIn
                                 </a>
-                            </Col>
-                            <Col xs={6} className='d-flex justify-content-end'>{!isOwner && loggedInUser && (
+                                {!isOwner && loggedInUser && (
                                 <button 
                                     onClick={handleAddFriend}
                                     disabled={isFriend}
+                                    style={{ fontSize:'0.8rem', padding: '2px 10px', whiteSpace: 'nowrap' }}
                                     className={isFriend ? 'friend-btn-active rounded-pill' : 'friend-btn rounded-pill'}
                                 >
                                     {isFriend ? '✓ Friends' : '+ Add Friend'}
                                 </button>
                             )}
-                            </Col>
-                        </Row>
+                        </div>
                     </Card.Body>
                 </Card>
 
             {/* DevSpace Details (Profile Data) */}
-            <Card className="user-info border-0 shadow-sm">
+            <Card className="user-info border-0 shadow-sm mb-3">
                 <Card.Header>{networkData.user.username}'s Interests</Card.Header>
                 {devSpaceData ? (
                     <>
@@ -171,11 +169,14 @@ const ProfilePage = ({ handleAddPost }) => {
                         </ListGroup>
                     </>
                 ) : (
-                    <div className='no-profile'>
-                        <p>This user hasn't customized their DevSpace yet.</p>
+                    <div className='no-profile mb-3'>
+                        <p className='mx-3 my-3'>This user hasn't customized their DevSpace yet.</p>
                         {isOwner && <button onClick={() => navigate(`/users/${userId}/edit`)}>Create Yours Now</button>}
                     </div>
                 )}
+            </Card>
+            <Card className='mb-3'>
+                <DevSpacePlayer searchQuery={devSpaceData?.profile_song}/>
             </Card>
             </Col>
             
@@ -194,7 +195,7 @@ const ProfilePage = ({ handleAddPost }) => {
                 )}
 
                 {/* User's Posts Feed */}
-                <section className='user-posts-wall mb-5'>
+                <section className='user-posts-wall mb-4'>
 
                 <h3 className='bg-white rounded pb-2 mb-3 fw-bold'>{networkData.user.username}'s Posts</h3>
                 
@@ -216,11 +217,11 @@ const ProfilePage = ({ handleAddPost }) => {
             </section>
 
             <section className='friends-list mb-3'>
-                <h3 className='bg-secondary text-white p-2 h6 mb-3'>My Top 8! | Total Friends: {networkData.friend_count}</h3>
+                <h3 className='bg-secondary text-white p-2 h6 mb-3 rounded'>My Top 8! | Total Friends: {networkData.friend_count}</h3>
                 <Row className='friends-grid g-3'>
                     {networkData.friends.slice(0, 8).map((friend) => (
                     <Col xs={3} key={friend.id} className='friend-item text-center'>
-                        <div className="bg-light border" style={{ height: '120px', width: '100%' }}>
+                        <div className="bg-light border rounded" style={{ height: '120px', width: '100%' }}>
                         <Link to={`/users/${friend.id}/profile`} className='text-decoration-none'>
                             <div className="friend-photo-container mb-1">
                                 <Image

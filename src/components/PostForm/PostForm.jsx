@@ -53,16 +53,17 @@ const PostForm = ({ handleAddPost, handleUpdatePost, shouldNavigate = true, isPr
   const formContent = (
     <Form onSubmit={handleSubmit} className="p-3">
       <Form.Group className="mb-3">
-          <Form.Label>What's on your mind?</Form.Label>
+          {/* <Form.Label>What's on your mind?</Form.Label> */}
           <Form.Control
             required
             name="content" // Matches state key and backend data['content']
             id="content-input"
+            placeholder="What's on your mind?"
             value={formData.content}
             onChange={handleChange}
           />
       </Form.Group>
-      <div className="d-flex gap-3 justify-content-center">
+      <div className="d-flex gap-3 pt-3 justify-content-center">
         <Button variant='primary' type='submit' className="rounded-pill px-4">Post to Network</Button>
         <Button variant='outline-secondary' onClick={() => navigate(-1)} className="rounded-pill px-4">Cancel</Button>
       </div>

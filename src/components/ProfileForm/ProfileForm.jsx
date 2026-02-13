@@ -19,7 +19,8 @@ const ProfileForm = ({ existingData, onSuccess }) => {
         fav_language: '',
         email: '',
         github_link: '',
-        linkedin_link: ''
+        linkedin_link: '', 
+        profile_song: ''
     });
     
     // fetch data if existingData is not provided
@@ -39,7 +40,8 @@ const ProfileForm = ({ existingData, onSuccess }) => {
                             fav_language: data.fav_language || '',
                             email: data.email || '',
                             github_link: data.github_link || '',
-                            linkedin_link: data.linkedin_link || ''
+                            linkedin_link: data.linkedin_link || '',
+                            profile_song: data.profile_song || ''
                         });
                         if (data.profile_picture_url) {
                             setPreviewUrl(data.profile_picture_url);
@@ -78,10 +80,16 @@ const ProfileForm = ({ existingData, onSuccess }) => {
     // for profile picture
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (file) {
-            setSelectedFile(file);
-            setPreviewUrl(URL.createObjectURL(file));
+        const MAX_SIZE = 10 * 1024 * 1024; // 10MB in bytes
+        
+        // check file size re: cloudinary constraints
+        if (file && file.size > MAX_SIZE) {
+        alert("This file is too big! Please choose an image smaller than 10MB.");
+        e.target.value = null; // Clear the input
+        return; 
         }
+        setSelectedFile(file);
+        setPreviewUrl(URL.createObjectURL(file));
     };
 
     // helper for the counter char limits
@@ -278,6 +286,23 @@ const ProfileForm = ({ existingData, onSuccess }) => {
                                         />
                                     </Form.Group>
                                 </Card.Body>
+                            </Card>
+
+                            {/* PROFILE SONG CARD */}
+                            <Card className='mb-4 shadow-sm'>
+                                <Form.Group className="mb-3">
+                                    <Form.Label className="fw-bold">Profile Song</Form.Label>
+                                    <Form.Control 
+                                        type="text" 
+                                        name="profile_song"
+                                        placeholder="Artist - Song Name (e.g. My Chemical Romance - Helena)" 
+                                        value={formData.profile_song}
+                                        onChange={(e) => setFormData({ ...formData, profile_song: e.target.value })}
+                                    />
+                                    <Form.Text className="text-muted">
+                                        We'll search the iTunes library for this song to play on your profile.
+                                    </Form.Text>
+                                </Form.Group>
                             </Card>
                             
                                 {/* ACTION BUTTONS */}
