@@ -124,15 +124,30 @@ const ProfilePage = ({ handleAddPost }) => {
                 {/* Contact Links */}
                 <Card className='user-contact-links mb-3 border-0 shadow-sm'>
                     <Card.Body>
-                        <Row className='g-2 text-center small'>
-                            <Col xs={6}><a className="text-decoration-none" href={`mailto:${devSpaceData?.email}`} target="_blank" rel="noreferrer">Message Me</a></Col>
-                            <Col xs={6}><a className="text-decoration-none" href={devSpaceData?.github_link} target="_blank">Connect on GitHub</a></Col>
-                            <Col xs={6}><a className="text-decoration-none" href={devSpaceData?.linkedin_link} target="_blank">Add on LinkedIn</a></Col>
-                            <Col xs={6}>{!isOwner && loggedInUser && (
+                        <Row className='g-2 d-flex justify-content-between small'>
+                            <Col xs={6} className='d-flex justify-content-start'>
+                                <a className="text-decoration-none" href={`mailto:${devSpaceData?.email}`} target="_blank" rel="noreferrer">
+                                    <img src="../../src/assets/square-envelope-solid-full.svg" alt="Email Me" style={{ width:"30px", height:"auto"}}></img>
+                                    Message Me
+                                </a>
+                            </Col>
+                            <Col xs={6} className='d-flex justify-content-end'>
+                                <a className="text-decoration-none" href={devSpaceData?.github_link} target="_blank">
+                                    <img src="../../src/assets/square-github-brands-solid-full.svg" alt="GitHub Link" style={{ width:"30px", height:"auto"}}></img>
+                                    Connect on GitHub
+                                </a>
+                            </Col>
+                            <Col xs={6} className='d-flex justify-content-start'>
+                                <a className="text-decoration-none" href={devSpaceData?.linkedin_link} target="_blank">
+                                    <img src="../../src/assets/square-linkedin-brands-solid-full.svg" alt="LinkedIn" style={{ width:"30px", height:"auto"}}></img>
+                                    Add on LinkedIn
+                                </a>
+                            </Col>
+                            <Col xs={6} className='d-flex justify-content-end'>{!isOwner && loggedInUser && (
                                 <button 
                                     onClick={handleAddFriend}
                                     disabled={isFriend}
-                                    className={isFriend ? 'friend-btn-active' : 'friend-btn'}
+                                    className={isFriend ? 'friend-btn-active rounded-pill' : 'friend-btn rounded-pill'}
                                 >
                                     {isFriend ? '✓ Friends' : '+ Add Friend'}
                                 </button>
@@ -214,7 +229,7 @@ const ProfilePage = ({ handleAddPost }) => {
                                     className='border shadow-sm'
                                     style={{
                                         width: '100%',
-                                        height: '80px',
+                                        height: '90px',
                                         objectFit: 'cover'
                                         }}    
                                     >
