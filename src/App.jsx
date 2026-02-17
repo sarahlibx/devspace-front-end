@@ -25,12 +25,10 @@ const App = () => {
     const [posts, setPosts] = useState([])
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(posts)
 
     useEffect(() => {
         const fetchAllPosts = async () => {
             const postsData = await postService.index()
-            console.log("Data from server:", postsData)
             setPosts(postsData)
         }
         if (user) fetchAllPosts()
@@ -56,7 +54,6 @@ const App = () => {
     }
 
     const handleUpdatePost = async (postId, postFormData) => {
-        console.log(postId, postFormData)
         const updatedPost = await postService.updatePost(postId, postFormData)
         setPosts(
             posts.map((post) =>

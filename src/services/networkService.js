@@ -8,7 +8,7 @@ const getNetworkData = async (userId) => {
         if (data.err) throw new Error(data.err);
         return data;
     } catch (err) {
-        console.log(err);
+        console.error(err);
         throw err;
     }
 };
@@ -20,7 +20,7 @@ const searchUsers = async (query) => {
         });
         return await res.json();
     } catch (err) {
-        console.log(err);
+        console.error(err);
         throw err;
     }
 };

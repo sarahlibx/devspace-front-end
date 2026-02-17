@@ -88,9 +88,6 @@ const ProfilePage = ({ handleAddPost }) => {
 
     if (loading) return <p>Loading DevSpace...</p>;
     if (!networkData) return <p>User not found.</p>
-
-    console.log("Friend Array Length:", networkData?.friends?.length);
-    console.log("Friend Count Property:", networkData?.friend_count);
     
     return (
         <Container className='mt-4'>

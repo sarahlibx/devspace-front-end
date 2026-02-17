@@ -27,12 +27,9 @@ const PostDetails = ({ handleDeletePost }) => {
         setPost({ 
             ...post, 
             comments: [newComment, ...post.comments] })
-            console.log('commentFormData -->', commentFormData)
     }
 
     const handleDeleteComment = async (commentId) => {
-        console.log("POST ID (from params):", postId);
-        console.log("COMMENT ID (from button):", commentId);
 
         if (!commentId) {
         console.error("No commentId provided to delete function!");
@@ -51,11 +48,6 @@ const PostDetails = ({ handleDeletePost }) => {
     };
 
     if (!post) return <Container className="mt-5 text-center"><h3>Loading DevPost...</h3></Container>;
-    console.log(post)
-
-    console.log('Post Author ID:', post.user_id);
-    console.log('Logged in User ID:', user.id);
-    console.log('Do they match?', post.user_id === user.id);
     
     return (
         <Container className='mt-5 mb-5'>
@@ -113,7 +105,6 @@ const PostDetails = ({ handleDeletePost }) => {
                 {!post.comments.length && <p className="text-muted text-center py-4">There are no comments.</p>}
 
                 {post.comments.map((comment) => {
-                    console.log('rendering comment object:', comment);
                     return (
                     <Card key={comment.comment_id || comment.id} className="mb-3 border-0 shadow-sm">
                         <Card.Body className='p-3'>
@@ -121,7 +112,6 @@ const PostDetails = ({ handleDeletePost }) => {
                                 <div>
                                     <span className='fw-bold text-primary'>{comment.author_username}:</span>
                                     <p className='mb-0 mt-1'>{comment.comment_text || comment.content}</p>
-                                    {console.log('This comment object:', comment)}
                                 </div>
 
                                 {Number(comment.user_id) === Number(user.id) && (

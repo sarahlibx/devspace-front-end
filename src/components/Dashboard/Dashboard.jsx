@@ -41,7 +41,6 @@ const Dashboard = () => {
     const myLatestPost = allPosts
         .filter(p => String(p.user_id) === String(loggedInUser?.id))
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
-        console.log("1. All Posts from Backend:", allPosts);
 
     // GRID 2: Recent Conversation (Checking the user_id inside comments)
     const recentCommentedPost = allPosts

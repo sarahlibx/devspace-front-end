@@ -22,10 +22,12 @@ const DevSpacePlayer = ({ searchQuery }) => {
         if (searchQuery) fetchTrack();
     }, [searchQuery]);
 
-if (!track) return <div className="player-loading">Loading your song...</div>;
-if (!track && searchQuery) return <div className="player-loading">Searching for "{searchQuery}"...</div>;
-// Don't show anything if no song is set
+// if no query at all, don't render anything
 if (!searchQuery) return null; 
+// if query but no track yet, we are actively searching
+if (!track && searchQuery) return <div className="player-loading">Searching for "{searchQuery}"...</div>;
+// fallback -- waiting for the song to load
+if (!track) return <div className="player-loading">Loading your song...</div>;
 
     return (
         <div className="devspace-player-container shadow-sm rounded border overflow-hidden">

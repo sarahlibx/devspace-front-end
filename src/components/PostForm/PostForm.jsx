@@ -6,7 +6,6 @@ import * as postService from "../../services/postService";
 const PostForm = ({ handleAddPost, handleUpdatePost, shouldNavigate = true, isProfile = false}) => {
   const { postId } = useParams();
   const navigate = useNavigate();
-  // console.log(postId);
   const [formData, setFormData] = useState({
     content: "",
   });
@@ -29,7 +28,6 @@ const PostForm = ({ handleAddPost, handleUpdatePost, shouldNavigate = true, isPr
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log("formData", formData);
     try {
       if (postId) {
         // Logic for EDITING an existing post

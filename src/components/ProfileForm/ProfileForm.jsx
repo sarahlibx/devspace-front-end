@@ -63,7 +63,6 @@ const ProfileForm = ({ existingData, onSuccess }) => {
     useEffect(() => {
         // Only run if existingData isn't null/undefined
         if (existingData && Object.keys(existingData).length > 0) {
-            console.log("Pre-filling form with:", existingData);
             setFormData(existingData);
         
             // Also set the image preview if it exists

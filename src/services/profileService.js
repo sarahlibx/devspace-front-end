@@ -8,7 +8,7 @@ const getDevSpaceData = async (userId) => {
         const data = await res.json();
         return data; 
     } catch (err) {
-        console.log(err);
+        console.error(err);
         throw err;
     }
 };
@@ -26,7 +26,7 @@ const updateDevSpace = async (formData) => {
         });
         return res.json();
     } catch (err) {
-        console.log(err);
+        console.error(err);
         throw err;
     }
 };

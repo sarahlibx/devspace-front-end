@@ -5,7 +5,7 @@
 </div>
   
 ---
-# DevSpace 
+# DevSpace
 
 ### 🌐 [CLICK TO DEMO](https://my-devspace.netlify.app/)
 
@@ -23,15 +23,16 @@ Built with React, React Router, and a custom REST API.
 
 ---
 
-## :camera_flash: Screenshots 
+## :camera_flash: Screenshots
 
-|   Description | Screenshot | 
-|:-------------:| -----------|
-| <h3 align="center">Landing Page</h3> | <img width="600" alt="landing-page" src="https://github.com/user-attachments/assets/5133ee63-6d2d-485c-87c1-e044f51fe784" /> |
-| <h3 align="center"> Dashboard </h3> | <img width="600" alt="dashboard" src="https://github.com/user-attachments/assets/adf2ebbf-3260-4b2a-a8ad-7b44fd98d9b9" /> |
+|              Description               | Screenshot                                                                                                                   |
+| :------------------------------------: | ---------------------------------------------------------------------------------------------------------------------------- |
+|  <h3 align="center">Landing Page</h3>  | <img width="600" alt="landing-page" src="https://github.com/user-attachments/assets/5133ee63-6d2d-485c-87c1-e044f51fe784" /> |
+|  <h3 align="center"> Dashboard </h3>   | <img width="600" alt="dashboard" src="https://github.com/user-attachments/assets/adf2ebbf-3260-4b2a-a8ad-7b44fd98d9b9" />    |
 | <h3 align="center"> User Profile </h3> | <img width="600" alt="user-profile" src="https://github.com/user-attachments/assets/2b689029-f7a7-45c1-9fe3-470a1be88076" /> |
 
 ## Tech Stack
+
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
@@ -60,37 +61,40 @@ Built with React, React Router, and a custom REST API.
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js (v18+ recommended)
 - npm
 - Backend API running locally or deployed
 
 ### Installation
-1. Clone the frontend repository  
+
+1. Clone the frontend repository
 2. Install dependencies
-  npm i
+   npm i
 3. Create a `.env` file and add the backend API URL  
-**VITE_BACK_END_SERVER_URL**=your_backend_url_here
+   **VITE_BACK_END_SERVER_URL**=your_backend_url_here
 4. Import the CSS file into your application's entry point, which is typically src/index.js, src/index.tsx, or src/main.jsx: import 'bootstrap/dist/css/bootstrap.min.css';
 5. Start the development server  
-npm run dev
+   npm run dev
 
 The app will run at `http://localhost:5173` by default.
 
 Netlify Deployment [Link](https://my-devspace.netlify.app/)
 
-* Production: Set FRONTEND_URL in Heroku to your Netlify domain.
-* Development: Defaults to localhost:5173
+- Production: Set FRONTEND_URL in Heroku to your Netlify domain.
+- Development: Defaults to localhost:5173
 
 ### Backend Repository
+
 The backend REST API for this project can be found here:  
 [Backend](https://github.com/sarahlibx/devspace-back-end)
 
 Make sure the backend is running before using the frontend.
 
-----
+---
 
 ## :computer: Features
- 
+
 - User authentication (signup, login)
 - JWT-based authorization
 - Owner-only access to user data
@@ -105,21 +109,27 @@ Make sure the backend is running before using the frontend.
 ## :books: Resources Used
 
 ### [React Bootstrap](https://react-bootstrap.netlify.app/docs/getting-started/introduction/)
+
 ### [iTunes Search API](https://performance-partners.apple.com/search-api#:~:text=The%20Search%20API%20allows%20you,%2C%20audiobooks%2C%20and%20TV%20shows.)
+
 ### [Web Design Museum](https://www.webdesignmuseum.org/gallery/myspace-in-2008)
+
+### [Cloudinary Set Up Guide](https://github.com/asands94/React-and-Flask-Image-Upload-With-Cloudinary/tree/main)
 
 ---
 
 ## :fire: Challenges Overcome
+
 - CORS Preflight Issues: Configured the frontend to send appropriate credentials to the cross-origin Heroku server.
 - State Management: Handled asynchronous race conditions when loading profile data to prevent "undefined" errors before the API responds.
 - The "Refresh" Bug: Implemented Netlify redirects to allow users to refresh their browser on any sub-route (like /users/1/wall) without losing the page.
 
->Note: If deploying to Netlify, ensure a _redirects file is present in the public folder with /* /index.html 200 to support React Router.
+> Note: If deploying to Netlify, ensure a \_redirects file is present in the public folder with /\* /index.html 200 to support React Router.
 
 ---
 
 ## :satellite: Future Enhancements
+
 - Implement "Like" functionality on posts.
 - Implement edit & delete functionality on comments.
 - Add real-time notifications for friend requests.
@@ -136,4 +146,4 @@ Make sure the backend is running before using the frontend.
 
 This project was built by:
 
-- **Sarah Smith** - [GitHub](https://github.com/sarahlibx) | [LinkedIn](https://www.linkedin.com/in/sarahsmithdeveloper/) 
+- **Sarah Smith** - [GitHub](https://github.com/sarahlibx) | [LinkedIn](https://www.linkedin.com/in/sarahsmithdeveloper/)

@@ -7,7 +7,7 @@ const index = async () => {
         })
         return res.json();
     } catch (err) {
-        console.log(err)
+        console.error(err)
     }
 };
 
@@ -18,7 +18,7 @@ const show = async (postId) => {
         })
         return res.json();
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
 
@@ -34,7 +34,7 @@ const create = async (postFormData) => {
         });
         return res.json();
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 };
 
@@ -50,7 +50,7 @@ const createComment = async (postId, commentFormData) => {
     });
     return res.json();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -65,7 +65,7 @@ const deletePost = async (postId) => {
     });
     return res.json();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -81,7 +81,7 @@ const updatePost = async (postId, postFormData) => {
         });
         return res.json();
     } catch (err) {
-        console.log(err)
+        console.error(err)
     };
 };
 
@@ -95,7 +95,7 @@ const deleteComment = async (postId, commentId) => {
         });
         return res.json();
     } catch (err) {
-        console.log(err)
+        console.error(err)
     };
 };
 
