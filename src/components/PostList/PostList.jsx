@@ -13,7 +13,7 @@ const PostList = ({ posts }) => {
         <Container className='shadow-sm border-0 bg-transparent'>
             <Row className='justify-content-center'>
                 <Col md={8}>
-                    <h2 className='my-4 py-1 rounded' style={{ fontFamily: 'Varela Round', backgroundColor: '#4b5ae4', color: '#FFFFFF' }}>Your Community Feed</h2>
+                    <h2 className='my-4 py-1 rounded' style={{ fontFamily: 'Varela Round', backgroundColor: '#4b5ae4', color: '#FFFFFF' }}>Dev Community Feed</h2>
                     {posts.map((post) => (
                         <Card key={post.id} className='mb-3 shadow-sm border-0'>
                             <Card.Body>

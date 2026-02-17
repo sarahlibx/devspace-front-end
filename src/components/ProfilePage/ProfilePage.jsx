@@ -220,7 +220,7 @@ const ProfilePage = ({ handleAddPost }) => {
             </section>
 
             <section className='friends-list mb-3'>
-                <h3 className='bg-secondary text-white p-2 h6 mb-3 rounded'>My Top 8! | Total Friends: {networkData.friend_count}</h3>
+                <h3 className='bg-secondary text-white p-2 h6 mb-3 rounded'>My Top 8! | Total Friends: {networkData.friends.length}</h3>
                 <Row className='friends-grid g-3'>
                     {networkData.friends.slice(0, 8).map((friend) => (
                     <Col xs={3} key={friend.id} className='friend-item text-center'>
