@@ -10,6 +10,9 @@ import { formatDate } from '../../utils/formatDate';
 import PostForm from '../PostForm/PostForm'; 
 import DevSpacePlayer from '../DevSpacePlayer/DevSpacePlayer';
 import defaultAvatar from '../../assets/no-picture-avatar.jpg';
+import emailIcon from '../../assets/square-envelope-solid-full.svg';
+import gitIcon from '../../assets/square-github-brands-solid-full.svg';
+import linkedInIcon from '../../assets/square-linkedin-brands-solid-full.svg';
 import './ProfilePage.css';
 
 const ProfilePage = ({ handleAddPost }) => {
@@ -128,17 +131,17 @@ const ProfilePage = ({ handleAddPost }) => {
                     <Card.Body className='p-2'>
                         <div className='d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center'>
                                 <a className="text-decoration-none d-flex align-items-center gap-1 text-nowrap" href={`mailto:${devSpaceData?.email}`} target="_blank" rel="noreferrer">
-                                    <img src="../../src/assets/square-envelope-solid-full.svg" alt="Email Me" style={{ width:"30px", height:"auto"}}></img>
+                                    <img src={emailIcon} alt="Email Me" style={{ width:"30px", height:"auto"}}></img>
                                     Message Me
                                 </a>
                                 <a className="text-decoration-none d-flex align-items-center gap-1 text-nowrap" href={devSpaceData?.github_link} target="_blank">
-                                    <img src="../../src/assets/square-github-brands-solid-full.svg" alt="GitHub Link" style={{ width:"30px", height:"auto"}}></img>
+                                    <img src={gitIcon} alt="GitHub Link" style={{ width:"30px", height:"auto"}}></img>
                                     Connect on GitHub
                                 </a>
                         </div>
                         <div className='d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center'>
                                 <a className="text-decoration-none d-flex align-items-center gap-1 text-nowrap" href={devSpaceData?.linkedin_link} target="_blank">
-                                    <img src="../../src/assets/square-linkedin-brands-solid-full.svg" alt="LinkedIn" style={{ width:"30px", height:"auto"}}></img>
+                                    <img src={linkedInIcon} alt="LinkedIn" style={{ width:"30px", height:"auto"}}></img>
                                     Add on LinkedIn
                                 </a>
                                 {!isOwner && loggedInUser && (

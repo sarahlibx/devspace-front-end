@@ -1,5 +1,5 @@
 // services/profileService.js
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/profiles`;
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/profiles` || 'http://127.0.0.1:5000/profiles';
 
 // Fetch someone's bio/prompts
 const getDevSpaceData = async (userId) => {

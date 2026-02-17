@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { Button, Navbar } from 'react-bootstrap';
+import navBarImg from "../../assets/devspacenav.png";
 import './NavBar.css';
 
 const NavBar = () => {
@@ -21,7 +22,7 @@ const NavBar = () => {
                 {/* LOGO: Always on the left */}
                 <Link className="navbar-brand d-flex align-items-center" to='/'>
                     <img 
-                        src="../../src/assets/devspacenav.png" 
+                        src={navBarImg} 
                         alt="DevSpace Icon"
                         width='70'
                         height='50'

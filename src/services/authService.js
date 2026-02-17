@@ -1,4 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/auth`
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/auth` || 'http://127.0.0.1:5000/auth';
 
 const signUp = async (formData) => {
     try {

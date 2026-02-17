@@ -1,4 +1,5 @@
 import './Landing.css';
+import landingImg from '../../assets/devspace-landing.png';
 import { Link } from 'react-router';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 
@@ -10,7 +11,7 @@ const Landing = () => {
                 <Container className='text-center py-5'>
                     <Row className='justify-content-center'>
                         <Col lg={8}>
-                            <img src="src/assets/devspace-landing.png" alt="DevSpace logo" className="landing-logo"/>
+                            <img src={landingImg} alt="DevSpace logo" className="landing-logo"/>
                             <h1 className="display-3 fw-bold mb-3">{"<h1>"}DevSpace{"</h1>"}</h1>
                                 <h3 className="lead mb-4">{"<h3>"}A social network with zero merge conflicts.{"</h3>"}</h3>
                                 <div className='justify-content-center mb-4'>

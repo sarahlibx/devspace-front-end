@@ -1,4 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/posts`;
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/posts` || 'http://127.0.0.1:5000/posts';
 
 const index = async () => {
     try {
