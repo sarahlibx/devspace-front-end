@@ -1,16 +1,114 @@
-# React + Vite
+<div id="header" align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img width="713" height="62" alt="banner" src="https://github.com/user-attachments/assets/9f8c1e26-b315-4e3b-9f11-1888e3ce55a0" />
 
-Currently, two official plugins are available:
+</div>
+  
+---
+# Frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<div id='screenshots' align='center'>
+  
+<img width="600" alt="landing-page" src="https://github.com/user-attachments/assets/f4acd82b-86cc-4386-8bc9-7f89eb01d19a" />
 
-## React Compiler
+<img width="600" alt="transactions" src="https://github.com/user-attachments/assets/d39ada51-882c-4b6e-857c-ca3403cf9b35" />
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+<img width="600" alt="mentor profile" src="https://github.com/user-attachments/assets/117a4be6-f86c-421b-bc2e-b6113aa9d345" />
 
-## Expanding the ESLint configuration
+</div>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+   
+
+   
+
+
+Money Mentor is a react-based CRUD application for tracking personal finances and building better money habits through visibility and motivation.
+
+Built with React, React Router, and a custom REST API.
+
+---
+
+Money Mentor helps users track income and expenses, view monthly summaries, and stay motivated with a points-based mentor system.
+
+## Tech Stack
+
+- React (Vite)
+- React Router
+- JavaScript
+- CSS
+- REST API
+- React Bootstrap [Doc](https://react-bootstrap.netlify.app/)
+- Recharts React Library [Doc](https://recharts.github.io/en-US/examples/SimpleBarChart/)
+- Netlify (frontend deployment) 
+- Heroku (backend deployment)
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm
+- Backend API running locally or deployed
+
+### Installation
+1. Clone the frontend repository  
+2. Install dependencies
+ npm i
+ npm install jspdf html2canvas
+
+3. Create a `.env` file and add the backend API URL  
+VITE_API_URL=your_backend_url_here
+4. Start the development server  
+npm run dev
+
+The app will run at `http://localhost:5173` by default.
+
+Netlify Deployment [Link](https://money-mentor2.netlify.app/)
+
+### Backend Repository
+The backend REST API for this project can be found here:  
+[Backend](https://github.com/angelikakasia/money-mentor-back-end)
+
+Make sure the backend is running before using the frontend.
+
+----
+
+## Features
+
+- User authentication (signup, login, logout)
+- Protected routes for authenticated users
+- Create, edit, and delete income and expense transactions
+- View transactions by month
+- Monthly summary with totals and charts
+- Mentor system with motivational messages
+- Points and level progression based on user activity
+
+
+---
+
+## Mentor System (Stretch Goal)
+
+- Mentor provides personalized motivational feedback
+- Users earn points for positive financial actions
+- Levels unlock based on total points
+- Users can see points remaining to the next level
+
+
+---
+
+## Notes
+
+- Frontend built with React and Context API
+- Authorization enforced by backend
+- Users can only modify their own data
+
+
+## Development Team
+
+This project was built collaboratively by:
+- **Angelika** - | [GitHub](https://github.com/angelikakasia?tab=repositories) | [LinkedIn](https://www.linkedin.com/in/angszy/) |
+
+- **Gabriel Restrepo** - | [GitHub](https://github.com/gabogara) | [LinkedIn](https://www.linkedin.com/in/gabriel-restrepo-acosta/) |
+
+- **Sarah Smith** - |[GitHub](https://github.com/sarahlibx) | [LinkedIn](https://www.linkedin.com/in/sarahsmithdeveloper/) |
