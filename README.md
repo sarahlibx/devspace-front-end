@@ -5,7 +5,7 @@
 </div>
   
 ---
-# Frontend
+# DevSpace Frontend
 
 <div id='screenshots' align='center'>
   
