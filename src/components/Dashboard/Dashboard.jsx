@@ -55,7 +55,7 @@ const Dashboard = () => {
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
 
     return (
-        <Container className='mt-4'>
+        <Container className='mt-5 pt-5'>
             <h2 className='mb-4'>Your DevSpace Dashboard</h2>
             <Row className='g-4'>
                 {/* GRID 1: my most recent post */}

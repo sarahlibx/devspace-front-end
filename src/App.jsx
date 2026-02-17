@@ -37,7 +37,7 @@ const App = () => {
     }, [user])
 
     // checking current path for background image display
-    const isLandingPage = location.pathname === '/';
+    const isLandingPage = location.pathname === '/' && !user;
 
     // set footer display rules
     const hideFooterPath = ['/sign-in', '/sign-up'];
@@ -52,7 +52,7 @@ const App = () => {
         const deletedPost = await postService.deletePost(postId)
         const filteredPosts = posts.filter((post) => post.id !== deletedPost.id)
         setPosts(filteredPosts)
-        navigate('/posts')
+        navigate(-1)
     }
 
     const handleUpdatePost = async (postId, postFormData) => {

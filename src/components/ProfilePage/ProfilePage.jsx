@@ -38,17 +38,12 @@ const ProfilePage = ({ handleAddPost }) => {
                     networkService.getNetworkData(userId),
                     profileService.getDevSpaceData(userId)
                 ]);
-
-                if (!data || data.error) {
-                    console.error("Backend returned an error:", data?.error);
-                    return;
-                }
                 
                 setNetworkData(network);
                 setDevSpaceData(devSpace?.user_id ? devSpace : null);
 
                 // check if logged in user is in friend list
-                const alreadyFriends = network.friends.some(f => f.id === loggedInUser?.id);
+                const alreadyFriends = network.friends.some(f => f.id === loggedInUser?.id) || false;
                 setIsFriend(alreadyFriends);
 
             } catch (err) {
@@ -111,7 +106,7 @@ const ProfilePage = ({ handleAddPost }) => {
                                 Edit Profile
                             </Link>
                         )}
-                        <div className="d-flex align-items-center justify-content-between mb-3 mt-3 gap-3">
+                        <div className="d-flex align-items-center justify-content-between mb-3 mt-3">
                             <Image 
                                 src={devSpaceData?.profile_picture_url || defaultAvatar} 
                                 alt='profile picture'
@@ -126,7 +121,7 @@ const ProfilePage = ({ handleAddPost }) => {
                         </div>
                         {/* Online Now Indicator */}
                             <Image 
-                                className="online-now "
+                                className="online-now"
                                 src="https://archive.org/download/myspaceon/myspaceon.gif"
                                 alt="online now"
                                 width='100'

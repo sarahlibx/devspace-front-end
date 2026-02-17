@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router'
+import { useParams, Link, useNavigate } from 'react-router'
 import { useState, useEffect, useContext } from 'react'
 import { Container, Card, Button, Badge } from 'react-bootstrap';
 import * as postService from '../../services/postService'
@@ -9,6 +9,7 @@ const PostDetails = ({ handleDeletePost }) => {
     const { postId } = useParams()
     const [post, setPost] = useState(null)
     const { user } = useContext(UserContext)
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPost = async () => {
