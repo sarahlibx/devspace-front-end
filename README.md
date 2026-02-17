@@ -51,7 +51,6 @@ Built with React, React Router, and a custom REST API.
 1. Clone the frontend repository  
 2. Install dependencies
   npm i
-  npm install react-bootstrap bootstrap
 3. Create a `.env` file and add the backend API URL  
 **VITE_BACK_END_SERVER_URL**=your_backend_url_here
 4. Import the CSS file into your application's entry point, which is typically src/index.js, src/index.tsx, or src/main.jsx: import 'bootstrap/dist/css/bootstrap.min.css';
@@ -62,9 +61,12 @@ The app will run at `http://localhost:5173` by default.
 
 Netlify Deployment [Link](https://my-devspace.netlify.app/)
 
+* Production: Set FRONTEND_URL in Heroku to your Netlify domain.
+* Development: Defaults to localhost:5173
+
 ### Backend Repository
 The backend REST API for this project can be found here:  
-[Backend](https://github.com/sarahlibx/devspace-back-end/blob/main/README.md)
+[Backend](https://github.com/sarahlibx/devspace-back-end)
 
 Make sure the backend is running before using the frontend.
 
@@ -80,8 +82,6 @@ Make sure the backend is running before using the frontend.
 - iTunes API integration for profile song
 - Fully styled with React-Bootstrap for a seamless experience across devices
 - The app uses dynamic CORS origins to allow for both local development and production environments.
--- Production: Set FRONTEND_URL in Heroku to your Netlify domain.
--- Development: Defaults to localhost:5173
 
 ---
 
@@ -89,6 +89,8 @@ Make sure the backend is running before using the frontend.
 - CORS Preflight Issues: Configured the frontend to send appropriate credentials to the cross-origin Heroku server.
 - State Management: Handled asynchronous race conditions when loading profile data to prevent "undefined" errors before the API responds.
 - The "Refresh" Bug: Implemented Netlify redirects to allow users to refresh their browser on any sub-route (like /users/1/wall) without losing the page.
+
+>Note: If deploying to Netlify, ensure a _redirects file is present in the public folder with /* /index.html 200 to support React Router.
 
 ---
 
@@ -121,4 +123,4 @@ Make sure the backend is running before using the frontend.
 
 This project was built by:
 
-- **Sarah Smith** - |[GitHub](https://github.com/sarahlibx) | [LinkedIn](https://www.linkedin.com/in/sarahsmithdeveloper/) 
+- **Sarah Smith** - [GitHub](https://github.com/sarahlibx) | [LinkedIn](https://www.linkedin.com/in/sarahsmithdeveloper/) 
