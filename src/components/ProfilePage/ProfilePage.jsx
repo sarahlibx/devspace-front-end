@@ -164,11 +164,11 @@ const ProfilePage = ({ handleAddPost }) => {
                 {devSpaceData ? (
                     <>
                         <ListGroup>
-                            <ListGroup.Item className='d-flex justify-content-start gap-2'><strong>Fun Fact:</strong> {devSpaceData.fun_fact}</ListGroup.Item>
-                            <ListGroup.Item className='d-flex justify-content-start gap-2'><strong>Favorite Band:</strong> {devSpaceData.fav_band}</ListGroup.Item>
-                            <ListGroup.Item className='d-flex justify-content-start gap-2'><strong>Fav Book:</strong> {devSpaceData.fav_book}</ListGroup.Item>
-                            <ListGroup.Item className='d-flex justify-content-start gap-2'><strong>Fav Coding Language:</strong> {devSpaceData.fav_language}</ListGroup.Item>
-                            <ListGroup.Item className='d-flex justify-content-start gap-2'><strong>Hobbies:</strong> {devSpaceData.hobbies}</ListGroup.Item>
+                            <ListGroup.Item className='d-flex justify-content-between gap-2'><strong className="text-nowrap">Fun Fact:</strong><span className="text-end">{devSpaceData.fun_fact}</span></ListGroup.Item>
+                            <ListGroup.Item className='d-flex justify-content-between gap-2'><strong className="text-nowrap">Favorite Band:</strong><span className="text-end">{devSpaceData.fav_band}</span></ListGroup.Item>
+                            <ListGroup.Item className='d-flex justify-content-between gap-2'><strong className="text-nowrap">Fav Book:</strong><span className="text-end">{devSpaceData.fav_book}</span></ListGroup.Item>
+                            <ListGroup.Item className='d-flex justify-content-between gap-2'><strong className="text-nowrap">Fav Coding Language:</strong><span className="text-end">{devSpaceData.fav_language}</span></ListGroup.Item>
+                            <ListGroup.Item className='d-flex justify-content-between gap-2'><strong className="text-nowrap">Hobbies:</strong><span className="text-end">{devSpaceData.hobbies}</span></ListGroup.Item>
                         </ListGroup>
                     </>
                 ) : (
