@@ -17,7 +17,7 @@ const Landing = () => {
                                 <div className='justify-content-center mb-4'>
                                     <Button 
                                         as={Link} 
-                                        to="/sign-in" 
+                                        to="/sign-up" 
                                         variant="outline-dark" 
                                         size="lg" 
                                         className="connect-btn rounded-pill px-5 fw-bold"
