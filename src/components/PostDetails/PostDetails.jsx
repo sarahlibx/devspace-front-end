@@ -56,7 +56,7 @@ const PostDetails = ({ handleDeletePost }) => {
                 <Card.Body className='p-4'>
                     <div className="d-flex justify-content-between align-items-start mb-3">
                         <div>
-                            <h1>Post #{post.id}</h1>
+                            <h1>{post.title}</h1>
                             <p>
                                 {`${post.author_username} posted on
                                 ${new Date(post.created_at).toLocaleDateString()}`}

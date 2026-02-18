@@ -7,17 +7,21 @@ const PostForm = ({ handleAddPost, handleUpdatePost, shouldNavigate = true, isPr
   const { postId } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    title: "",
     content: "",
   });
 
   useEffect(() => {
     const fetchPost = async () => {
       const postData = await postService.show(postId);
-      setFormData({ content: postData.content });
+      setFormData({ 
+        title: postData.title,
+        content: postData.content });
     };
     if (postId) fetchPost();
     return () =>
       setFormData({
+        title: "",
         content: ""
       });
   }, [postId]);
@@ -47,12 +51,22 @@ const PostForm = ({ handleAddPost, handleUpdatePost, shouldNavigate = true, isPr
   const formContent = (
     <Form onSubmit={handleSubmit} className="p-3">
       <Form.Group className="mb-3">
+          <Form.Control
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Give your post a title:"
+              required
+          />
           {/* <Form.Label>What's on your mind?</Form.Label> */}
           <Form.Control
+            className="mt-3"
             required
             name="content" // Matches state key and backend data['content']
             id="content-input"
             placeholder="What's on your mind?"
+            type="text"
             value={formData.content}
             onChange={handleChange}
           />
