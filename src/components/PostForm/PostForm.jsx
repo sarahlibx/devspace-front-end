@@ -15,8 +15,8 @@ const PostForm = ({ handleAddPost, handleUpdatePost, shouldNavigate = true, isPr
     const fetchPost = async () => {
       const postData = await postService.show(postId);
       setFormData({ 
-        title: postData.title,
-        content: postData.content });
+        title: postData.title || "",
+        content: postData.content || "" });
     };
     if (postId) fetchPost();
     return () =>
