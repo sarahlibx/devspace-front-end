@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
-import { Button, Navbar } from 'react-bootstrap';
+import { Button, Navbar, Nav, Container } from 'react-bootstrap';
 import navBarImg from "../../assets/devspacenav.png";
 import './NavBar.css';
 
@@ -16,11 +16,11 @@ const NavBar = () => {
     };
 
     return (
-        <nav className='navbar navbar-expand-lg navbar-light mb-4 border-bottom'>
-            <div className='container'>
+        <NavBar expand="lg" className='navbar navbar-light mb-4 border-bottom'>
+            <Container className='container'>
 
                 {/* LOGO: Always on the left */}
-                <Link className="navbar-brand d-flex align-items-center" to='/'>
+                <Navbar.Brand as={Link} to='/' className="navbar-brand d-flex align-items-center">
                     <img 
                         src={navBarImg} 
                         alt="DevSpace Icon"
@@ -28,26 +28,27 @@ const NavBar = () => {
                         height='50'
                         className='d-inline-block align-top'
                     />
-                </Link>
+                </Navbar.Brand>
 
+                {/* hamburger menu button */}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
                 {/* right aligned nav */}
-                <div className='collapse navbar-collapse'>
-                    <div className='navbar-nav ms-auto align-items-center gap-3'>
+                <Navbar.Collapse id='basic-navbar-nav'>
+                    <Nav className='ms-auto align-items-center gap-3'>
 
                     {user ? (
                         <>
             
-                        <Link className='nav-link fw-bold text-dark' to='/'>HOME</Link>
+                        <Nav.Link className='nav-link fw-bold text-dark' to='/'>HOME</Nav.Link>
                  
-                        <Link className='nav-link fw-bold text-dark' to='/posts'>Dev Network</Link>
+                        <Nav.Link className='nav-link fw-bold text-dark' to='/posts'>Dev Network</Nav.Link>
                    
-                        <Link className='nav-link fw-bold text-dark' to="/search">Find Friends</Link>
+                        <Nav.Link className='nav-link fw-bold text-dark' to="/search">Find Friends</Nav.Link>
                     
-                        <Link className='nav-link fw-bold text-dark' to='/posts/new'>Add Post</Link>
+                        <Nav.Link className='nav-link fw-bold text-dark' to='/posts/new'>Add Post</Nav.Link>
                    
-                        <Link className='nav-link fw-bold text-dark' to={`/users/${user.id}/profile`}>My DevSpace</Link>
+                        <Nav.Link className='nav-link fw-bold text-dark' to={`/users/${user.id}/profile`}>My DevSpace</Nav.Link>
 
                         <Button
                             className='btn btn-primary rounded-pill px-4 text-white fw-bold' 
@@ -59,9 +60,9 @@ const NavBar = () => {
                         </>
             ) : (
                 <>
-                        <Link to='/'>Home</Link>
+                        <Nav.Link to='/'>Home</Nav.Link>
                         
-                        <Link className="nav-link fw-bold text-dark" to='/sign-in'>Sign In</Link>
+                        <Nav.Link className="nav-link fw-bold text-dark" to='/sign-in'>Sign In</Nav.Link>
 
                         <Button
                             as={Link} 
@@ -72,10 +73,10 @@ const NavBar = () => {
                         </Button>
                 </>
             )}
-               </div>
-                </div>
-            </div>
-        </nav>
+                </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </NavBar>
     )
 }
 
