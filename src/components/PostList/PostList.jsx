@@ -34,6 +34,7 @@ const PostList = ({ posts }) => {
                                         posted on {formatDate(post.created_at)}
                                     </div>
                                     </div>
+                                    <Card.Title>{post.title || "Untitled Post"}</Card.Title>
                                 <Card.Text>{post.content}</Card.Text>
                             </Card.Body>
                         </Card>
