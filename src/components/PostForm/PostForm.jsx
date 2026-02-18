@@ -36,17 +36,13 @@ const PostForm = ({ handleAddPost, handleUpdatePost, shouldNavigate = true, isPr
       } else {
         // logic for CREATING a new post
         await handleAddPost(formData);
-        if (shouldNavigate) {
-          navigate('/posts');
-        }
-    }
-
-    setFormData({ title: '', content: '' });
-
+        setFormData({ title: '', content: '' });
+        if (shouldNavigate) navigate('/posts');
+      }
     } catch (err) {
       console.error('Form submission error', err);
-    }
   }
+}
 
   const formContent = (
     <Form onSubmit={handleSubmit} className="p-3">

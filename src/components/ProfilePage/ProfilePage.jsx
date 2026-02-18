@@ -206,7 +206,7 @@ const ProfilePage = ({ handleAddPost }) => {
                 {networkData.posts && networkData.posts.length > 0 ? (
                     <div className='posts-container'>
                         {networkData.posts.map((post) => (
-                        <article key={post.id} className='post-card p-4 bg-white rounded text-center text-muted mb-3'>
+                        <article key={post.id || post._id} className='post-card p-4 bg-white rounded text-center text-muted mb-3'>
                             <h4>{post.title}</h4>
                             <p>{post.content}</p>
                             <small>Posted on {formatDate(post.created_at)}</small>
